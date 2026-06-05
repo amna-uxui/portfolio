@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Amna</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;700&family=Space+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <nav class="navbar" id="contact-bar" aria-expanded="false">
+    <div class="navbar__top">
+      <button type="button" class="navbar__link" id="contact-button">Contact me</button>
+    </div>
+    <div class="navbar__details" id="contact-details" hidden>
+      <p><a href="#" class="navbar__details-link">Download my resume from here</a></p>
+      <p>Email: <a href="mailto:amna.ahmad@ecal.ch">amna.ahmad@ecal.ch</a></p>
+      <p>LinkedIn: <a href="https://www.linkedin.com/in/amna-ahmad-1564761b2/" target="_blank" rel="noopener">https://www.linkedin.com/in/amna-ahmad-1564761b2/</a></p>
+      <p>Behance: <a href="https://www.behance.net/amnaahmad2017" target="_blank" rel="noopener">https://www.behance.net/amnaahmad2017</a></p>
+    </div>
+  </nav>
+
+  <header class="banner" id="banner">
+    <div class="banner__inner">
+      <p class="banner__text">
+        <span class="banner__greeting" id="banner-greeting">Salut, I am</span>
+        <button type="button" class="banner__name" id="banner-name">Amna.</button><span class="banner__bio">, a computer engineer turned digital experience designer with nearly four years of professional experience across startup and research environments. Currently pursuing a Master of Arts in Design with a focus on Digital Experience Design at École cantonale d'art de Lausanne (ECAL), my work sits at the intersection of design, technology, and user experience.</span>
+      </p>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <div class="columns-viewport">
+      <div class="columns">
+
+        <!-- Design column -->
+        <div class="columns__lane columns__lane--left" data-column="left">
+          <div class="columns__track font-archivo" data-speed="0.35">
+            <h2 class="columns__section-title">Design</h2>
+            <p class="columns__text columns__text--scroll">
+              My design practice sits between visual expression and digital experience.
+              I design digital experiences with a soft spot for details: movement, rhythm,
+              layout, and tiny interactions that make a screen feel alive. For me, design
+              is not just about making things look good, it is about making technology
+              feel more human.
+            </p>
+            <div class="columns__panel">
+              <div class="columns__panel-top">
+                <h2 class="columns__title">Design</h2>
+                <p class="columns__text columns__text--intro">
+                  My design practice sits between visual expression and digital experience.
+                  I design digital experiences with a soft spot for details: movement, rhythm,
+                  layout, and tiny interactions that make a screen feel alive. For me, design
+                  is not just about making things look good, it is about making technology
+                  feel more human.
+                </p>
+              </div>
+              <div class="columns__panel-bottom">
+                <ul class="columns__projects" aria-label="Design projects">
+                  <li class="columns__project" data-description="This project imagines a fictional music label with an identity that does not stay still. Through modular graphics, animation, and procedural rules in Cavalry, I created a visual system that can shift, pulse, stretch, and adapt while keeping a clear graphic language." data-image="assets/mindset.png" data-video="assets/mindset.mp4">
+                    <button type="button" class="columns__project-name">Modular Mindset</button>
+                  </li>
+                  <li class="columns__project" data-description="The original website for Bisses du Valais museum is content-heavy, but its outdated information architecture makes navigation difficult. Key information is hard to find, and the lack of cohesive branding and consistent design weakens the overall experience, highlighting a clear opportunity for strategic design intervention to improve structure and clarity." data-image="assets/Bisses.png" data-video="assets/website.mp4">
+                    <button type="button" class="columns__project-name">Bisses du Valais</button>
+                  </li>
+                  <li class="columns__project" data-description="The primary objective of the rebranding is to systematically upgrade the visual aesthetics of all Human-Machine Interface (HMI) panels, bringing them in line with modern design standards. This initiative is crucial for improving both the usability and visual appeal of the system, ensuring that it remains competitive and user-friendly in today's fast-evolving technological landscape." data-image="assets/cern.png">
+                    <button type="button" class="columns__project-name">UNICOS Branding</button>
+                  </li>
+                  <li class="columns__project" data-description="eCareDocta is a mobile application designed to connect patients with doctors, addressing critical healthcare challenges in Cameroon. With poverty and limited access to quality healthcare as key issues, the app aims to provide an affordable and efficient solution for remote consultations." data-image="assets/eCare.png">
+                    <button type="button" class="columns__project-name">eCareDocta</button>
+                  </li>
+                  <li class="columns__project" data-description="During my time at OBS Technologia, I had the opportunity to contribute to a variety of creative tasks, ranging from branding to infographics and marketing materials. This multi-disciplinary role allowed me to refine my design skills and expand my understanding of the industry." data-image="assets/Lbranding.png">
+                    <button type="button" class="columns__project-name">LeanTech Branding</button>
+                  </li>
+                </ul>
+                <div class="columns__detail-col">
+                  <div class="columns__detail-offset"></div>
+                  <button type="button" class="columns__project-detail" hidden></button>
+                  <img class="columns__project-image" hidden alt="">
+                  <video class="columns__project-video" hidden muted loop playsinline controls></video>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Technology column -->
+        <div class="columns__lane columns__lane--middle" data-column="middle">
+          <div class="columns__track font-space-mono" data-speed="0.6">
+            <h2 class="columns__section-title">Tech Side</h2>
+            <p class="columns__text columns__text--scroll">
+              With a foundation in computer science and experience building digital systems,
+              I enjoy transforming abstract ideas into working interfaces that are functional,
+              thoughtful, and grounded in real use.
+            </p>
+            <div class="columns__panel">
+              <div class="columns__panel-top">
+                <h2 class="columns__title">Tech Side</h2>
+                <p class="columns__text columns__text--intro">
+                  With a foundation in computer science and experience building digital systems,
+                  I enjoy transforming abstract ideas into working interfaces that are functional,
+                  thoughtful, and grounded in real use.
+                </p>
+              </div>
+              <div class="columns__panel-bottom">
+                <ul class="columns__projects" aria-label="Technology projects">
+                  <li class="columns__project" data-project="unicos" data-description="The UNICOS HMI was developed more than 15 years ago and has since then evolved with contributions of tons of developers. The overall set of panels constituting the UNICOS HMI is therefore outdated and heterogeneous. CERN wishes to modernize and homogenize the UNICOS user experience for its open source release by first updating and unifying its visual identity." data-image="assets/cern1.jpg">
+                    <button type="button" class="columns__project-name">UNICOS</button>
+                  </li>
+                  <li class="columns__project" data-description="The project focuses on making complex information easier to understand through generative design, visual mapping, and experimentation with form, movement, randomness and layout. Overall, the outcome shows how data can be turned into a meaningful and visually interesting representation." data-image="assets/Bisses.png" data-video="assets/sledge.mp4">
+                    <button type="button" class="columns__project-name">Sledgehammer</button>
+                  </li>
+                  <li class="columns__project" data-description="For my semester project, I designed a website and drama platform in the context of pakistani audience. Content was divided in various categories and inspiration was taken from platforms like netflix and amazon. Website allowed people to search content on the basis of different categories too." data-image="assets/web.png">
+                    <button type="button" class="columns__project-name">Movie streaming website</button>
+                  </li>
+                </ul>
+                <div class="columns__detail-col">
+                  <div class="columns__detail-offset"></div>
+                  <button type="button" class="columns__project-detail" hidden></button>
+                  <img class="columns__project-image" hidden alt="">
+                  <video class="columns__project-video" hidden muted loop playsinline controls></video>
+                </div>
+              </div>
+              <aside class="columns__deep-dive" aria-label="UNICOS project details" hidden>
+                <h3>Problem Statement:</h3>
+                <p>
+                  The primary objective of the rebranding is to systematically upgrade
+                  the visual aesthetics of all Human-Machine Interface (HMI) panels,
+                  bringing them in line with modern design standards. This initiative is
+                  crucial for improving both usability and visual appeal.
+                </p>
+                <h3>Identifying Problems in existing Interfaces of UNICOS framework</h3>
+                <img src="assets/problem4.png" alt="Existing UNICOS interface">
+                </br>
+                <h4>Complex Interface</h4>
+                <p>
+                  The existing interface is complicated as key functionalities are buried 
+                  within complex menus, making it challenging for users to complete tasks 
+                  efficiently.
+                </p>
+                <img src="assets/problem2.png" alt="Existing UNICOS interface">
+                </br>
+                <h4>Color Assignment</h4>
+                <p>
+                  In UNICOS, colors play a critical role as the framework is designed to 
+                  represent the real-time status of various alarms and events. Therefore, 
+                  establishing a well-defined and consistent color database is essential 
+                  to ensure clarity and effectiveness.
+                </p>
+                <img src="assets/problem3.png" alt="Existing UNICOS interface">
+                </br>
+                <h4>Visual Inconsistency</h4>
+                <p>
+                  The existing HMI window exhibited several challenges, including a lack of 
+                  visual coherence and the use of unlicensed images, which undermined both the 
+                  aesthetics and functionality of the interface
+                </p>
+                </br>
+                </br>
+                </br>
+              </aside>
+            </div>
+          </div>
+        </div>
+
+        <!-- Research column -->
+        <div class="columns__lane columns__lane--right" data-column="right">
+          <div class="columns__track font-century" data-speed="0.9">
+            <h2 class="columns__section-title">Research</h2>
+            <p class="columns__text columns__text--scroll">
+              Research gives my work direction. Through observation, questioning, testing,
+              and reflection, I explore the relationship between people, technology, and
+              culture. It allows me to move beyond assumptions and design with curiosity,
+              context, and intention.
+            </p>
+            <div class="columns__panel">
+              <div class="columns__panel-top">
+                <h2 class="columns__title">Research</h2>
+                <p class="columns__text columns__text--intro">
+                  Research gives my work direction. Through observation, questioning, testing,
+                  and reflection, I explore the relationship between people, technology, and
+                  culture. It allows me to move beyond assumptions and design with curiosity,
+                  context, and intention.
+                </p>
+              </div>
+              <div class="columns__panel-bottom">
+                <ul class="columns__projects" aria-label="Research projects">
+                  <li class="columns__project" data-description="Lost & Found is a speculative tangible-digital system designed to help ECAL students reconnect with lost belongings through object scanning, object recognition, and connected locker storage, giving lost items a better chance of finding their way back home." data-image="assets/lost.jpg">
+                    <button type="button" class="columns__project-name">Lost and Found</button>
+                  </li>
+                  <li class="columns__project" data-description="Duolingo positions itself as a free, fun, and effective way to learn languages; however, this project challenges that narrative by examining the learning experience." data-image="assets/Duo.png">
+                    <button type="button" class="columns__project-name">Duolingo</button>
+                  </li>
+                  <li class="columns__project" data-description="You have been commissioned to design the interface for an interactive in-store kiosk for chocolate stores in Suisse Romande. This kiosk allows customers to create a unique, personalised chocolate recipe prepared and delivered live on-site, and execute payment at the kiosk directly." data-image = "assets/kiosk.jpg">
+                    <button type="button" class="columns__project-name">UX Bootcamp</button>
+                  </li>
+                </ul>
+                <div class="columns__detail-col">
+                  <div class="columns__detail-offset"></div>
+                  <button type="button" class="columns__project-detail" hidden></button>
+                  <img class="columns__project-image" hidden alt="">
+                  <video class="columns__project-video" hidden muted loop playsinline controls></video>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="columns-scroll-spacer" aria-hidden="true"></div>
+  </main>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
