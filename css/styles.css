@@ -709,7 +709,7 @@ body {
 
   .columns:not(.is-expanded) .columns__section-title,
   .columns:not(.is-expanded) .columns__text--scroll {
-    font-size: 46px;
+    font-size: 44px;
     line-height: 1.18;
   }
 }
