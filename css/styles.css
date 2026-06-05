@@ -5,6 +5,10 @@
   box-sizing: border-box;
 }
 
+:root {
+  --site-chrome: 112px;
+}
+
 body {
   margin: 0;
   font-family: "Archivo", sans-serif;
@@ -158,7 +162,6 @@ body {
 .columns-viewport {
   position: sticky;
   top: 0;
-  height: 100vh;
   overflow: hidden;
   background-color: #fff;
 }
@@ -359,9 +362,9 @@ body {
 
 .columns.is-middle-expanded .columns__lane--middle .columns__panel.has-deep-dive {
   position: relative;
-  height: calc(100vh - 4rem);
-  min-height: calc(100vh - 4rem);
-  max-height: calc(100vh - 4rem);
+  height: calc(100vh - var(--site-chrome) - 4rem);
+  min-height: calc(100vh - var(--site-chrome) - 4rem);
+  max-height: calc(100vh - var(--site-chrome) - 4rem);
   overflow: hidden;
   --deep-dive-width: 70%;
   --col1-width: 110px;
@@ -680,6 +683,260 @@ body {
   pointer-events: none;
 }
 
+/* Desktop: columns fill the viewport below nav + banner (1080 & 1200) */
+@media (min-width: 769px) {
+  .columns-viewport {
+    height: calc(100vh - var(--site-chrome));
+    z-index: 2;
+  }
+
+  .columns-scroll-spacer {
+    position: relative;
+    z-index: 0;
+  }
+}
+
+@media (min-width: 769px) and (max-height: 1080px) {
+  .columns__track {
+    padding: 1.5rem 2rem;
+    padding-bottom: 50vh;
+  }
+
+  .columns.is-expanded .columns__track {
+    padding: 1.25rem 0.75rem;
+    padding-bottom: 50vh;
+  }
+
+  .columns:not(.is-expanded) .columns__section-title,
+  .columns:not(.is-expanded) .columns__text--scroll {
+    font-size: 46px;
+    line-height: 1.18;
+  }
+}
+
+@media (min-width: 769px) and (min-height: 1081px) {
+  .columns:not(.is-expanded) .columns__section-title,
+  .columns:not(.is-expanded) .columns__text--scroll {
+    font-size: 60px;
+    line-height: 1.15;
+  }
+}
+
+/* Opt-in recording frame: add ?recording=1 to the URL (1920x1200).
+   1.5× typography for capture; columns fill space below the header. */
+html.is-recording {
+  --site-chrome: 112px;
+  --recording-col1: 165px;
+  --recording-panel-col: 300px;
+}
+
+html.is-recording body {
+  min-height: 100vh;
+  height: auto;
+  overflow-x: hidden;
+}
+
+html.is-recording .navbar {
+  height: auto;
+  min-height: 56px;
+  flex-shrink: 0;
+}
+
+html.is-recording .navbar__top {
+  height: auto;
+  min-height: 56px;
+  padding: 6px 0;
+}
+
+html.is-recording .navbar__link {
+  font-size: 27px;
+}
+
+html.is-recording .navbar__details {
+  font-size: 30px;
+}
+
+html.is-recording .banner {
+  height: auto;
+  min-height: 56px;
+  flex-shrink: 0;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+html.is-recording .banner__text {
+  font-size: 30px;
+  line-height: 1.15;
+}
+
+html.is-recording .banner.is-expanded .banner__text {
+  line-height: 1.4;
+}
+
+html.is-recording .main-content {
+  position: relative;
+}
+
+html.is-recording .columns-viewport {
+  position: sticky;
+  top: 0;
+  height: calc(100vh - var(--site-chrome));
+  overflow: hidden;
+  z-index: 2;
+}
+
+html.is-recording .columns-scroll-spacer {
+  pointer-events: none;
+  position: relative;
+  z-index: 0;
+}
+
+html.is-recording .columns:not(.is-expanded) .columns__track {
+  transition:
+    padding 0.85s cubic-bezier(0.22, 1, 0.36, 1),
+    color 0.35s ease;
+}
+
+html.is-recording .columns:not(.is-expanded) .columns__section-title,
+html.is-recording .columns:not(.is-expanded) .columns__text--scroll {
+  transition:
+    color 0.35s ease,
+    font-size 0.85s cubic-bezier(0.22, 1, 0.36, 1),
+    line-height 0.85s ease,
+    opacity 0.35s ease;
+}
+
+html.is-recording .columns:not(.is-expanded) .columns__lane:hover .columns__track,
+html.is-recording .columns:not(.is-expanded) .columns__lane:hover .columns__section-title,
+html.is-recording .columns:not(.is-expanded) .columns__lane:hover .columns__text--scroll,
+html.is-recording .columns:not(.is-expanded) .columns__lane.is-hovered .columns__track,
+html.is-recording .columns:not(.is-expanded) .columns__lane.is-hovered .columns__section-title,
+html.is-recording .columns:not(.is-expanded) .columns__lane.is-hovered .columns__text--scroll,
+html.is-recording .columns:not(.is-expanded) .columns__track.is-hovered,
+html.is-recording .columns:not(.is-expanded) .columns__track.is-hovered .columns__section-title,
+html.is-recording .columns:not(.is-expanded) .columns__track.is-hovered .columns__text--scroll {
+  color: #ef3167;
+  cursor: pointer;
+}
+
+html.is-recording .columns__section-title {
+  font-size: 60px;
+  line-height: 1.18;
+}
+
+html.is-recording .columns__text--scroll {
+  font-size: 60px;
+  line-height: 1.18;
+}
+
+html.is-recording .columns__panel-top {
+  grid-template-columns: var(--recording-panel-col) 1fr;
+}
+
+html.is-recording .columns__panel-top .columns__title {
+  font-size: 33px;
+  line-height: 1.2;
+}
+
+html.is-recording .columns__panel-top .columns__text--intro {
+  font-size: 33px;
+  line-height: 1.45;
+}
+
+html.is-recording .columns__panel-bottom {
+  grid-template-columns: var(--recording-panel-col) 1fr;
+  margin-top: 3.5rem;
+}
+
+html.is-recording .columns__projects {
+  font-size: 30px;
+  line-height: 1.5;
+}
+
+html.is-recording .columns__project-detail {
+  font-size: 30px;
+  line-height: 1.45;
+}
+
+html.is-recording .columns__project-image,
+html.is-recording .columns__project-video {
+  width: min(720px, 100%);
+  max-height: 480px;
+}
+
+html.is-recording .columns.is-left-expanded .columns__lane--middle .columns__text--scroll,
+html.is-recording .columns.is-left-expanded .columns__lane--right .columns__text--scroll,
+html.is-recording .columns.is-middle-expanded .columns__lane--left .columns__text--scroll,
+html.is-recording .columns.is-middle-expanded .columns__lane--right .columns__text--scroll,
+html.is-recording .columns.is-right-expanded .columns__lane--left .columns__text--scroll,
+html.is-recording .columns.is-right-expanded .columns__lane--middle .columns__text--scroll {
+  font-size: 17px;
+  line-height: 1.15;
+}
+
+html.is-recording .columns.is-left-expanded .columns__lane--middle .columns__section-title,
+html.is-recording .columns.is-left-expanded .columns__lane--right .columns__section-title,
+html.is-recording .columns.is-middle-expanded .columns__lane--left .columns__section-title,
+html.is-recording .columns.is-middle-expanded .columns__lane--right .columns__section-title,
+html.is-recording .columns.is-right-expanded .columns__lane--left .columns__section-title,
+html.is-recording .columns.is-right-expanded .columns__lane--middle .columns__section-title {
+  font-size: 17px;
+  line-height: 1.15;
+}
+
+html.is-recording .columns.is-middle-expanded .columns__lane--middle.is-deep-dive-lane {
+  --col1-width: var(--recording-col1);
+}
+
+html.is-recording .columns.is-middle-expanded .columns__lane--middle.is-deep-dive-lane::before {
+  left: calc(2rem + var(--recording-col1));
+}
+
+html.is-recording .columns.is-middle-expanded .columns__lane--middle .columns__panel.has-deep-dive {
+  --col1-width: var(--recording-col1);
+  height: 100%;
+  min-height: 0;
+  max-height: none;
+}
+
+html.is-recording .columns.is-middle-expanded .columns__lane--middle .columns__panel.has-deep-dive .columns__panel-top .columns__title,
+html.is-recording .columns.is-middle-expanded .columns__lane--middle .columns__panel.has-deep-dive .columns__panel-top .columns__text--intro {
+  font-size: 20px;
+  line-height: 1.35;
+}
+
+html.is-recording .columns.is-middle-expanded .columns__lane--middle .columns__panel.has-deep-dive .columns__projects {
+  font-size: 14px;
+  line-height: 1.35;
+}
+
+html.is-recording .columns.is-middle-expanded .columns__lane--middle .columns__panel.has-deep-dive .columns__project-detail {
+  font-size: 15px;
+  line-height: 1.45;
+}
+
+html.is-recording .columns.is-middle-expanded .columns__lane--middle .columns__panel.has-deep-dive .columns__deep-dive:not([hidden]) {
+  font-size: 21px;
+  line-height: 1.45;
+}
+
+html.is-recording .columns.is-middle-expanded .columns__lane--middle .columns__panel.has-deep-dive .columns__deep-dive:not([hidden]) h3,
+html.is-recording .columns.is-middle-expanded .columns__lane--middle .columns__panel.has-deep-dive .columns__deep-dive:not([hidden]) h4 {
+  font-size: 21px;
+  line-height: 1.3;
+}
+
+html.is-recording .columns__deep-dive {
+  font-size: 20px;
+  line-height: 1.45;
+}
+
+html.is-recording .columns__deep-dive h3,
+html.is-recording .columns__deep-dive h4 {
+  font-size: 20px;
+  line-height: 1.3;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .columns__track {
     transition: none;
@@ -748,6 +1005,7 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 0;
+    height: auto;
     overflow: hidden;
   }
 

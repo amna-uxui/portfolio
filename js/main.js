@@ -1,3 +1,17 @@
+const isRecording = new URLSearchParams(window.location.search).has('recording');
+if (isRecording) {
+  document.documentElement.classList.add('is-recording');
+}
+
+function updateSiteChrome() {
+  const navbar = document.getElementById('contact-bar');
+  const banner = document.getElementById('banner');
+  if (navbar && banner) {
+    const chrome = navbar.offsetHeight + banner.offsetHeight;
+    document.documentElement.style.setProperty('--site-chrome', `${chrome}px`);
+  }
+}
+
 // Contact bar expand / collapse
 const contactBar = document.getElementById('contact-bar');
 const contactButton = document.getElementById('contact-button');
@@ -61,11 +75,15 @@ contactBar.addEventListener('transitionend', (event) => {
     contactBar.classList.remove('is-expanded');
     contactDetails.hidden = true;
     contactBar.style.height = `${CONTACT_COLLAPSED_HEIGHT}px`;
+    updateSiteChrome();
+    updateColumnScroll();
     return;
   }
   if (contactBar.classList.contains('is-expanded')) {
     contactBar.style.height = 'auto';
   }
+  updateSiteChrome();
+  updateColumnScroll();
 });
 
 // Banner expand / collapse
@@ -132,11 +150,15 @@ banner.addEventListener('transitionend', (event) => {
     bannerGreeting.textContent = COLLAPSED_GREETING;
     bannerName.textContent = COLLAPSED_NAME;
     banner.style.height = `${COLLAPSED_HEIGHT}px`;
+    updateSiteChrome();
+    updateColumnScroll();
     return;
   }
   if (banner.classList.contains('is-expanded')) {
     banner.style.height = 'auto';
   }
+  updateSiteChrome();
+  updateColumnScroll();
 });
 
 banner.setAttribute('aria-expanded', 'false');
@@ -337,6 +359,10 @@ function toggleColumnExpansion(columnName) {
 
   clearProjectDetails();
   columns.classList.remove('is-expanded', ...expandedColumnClasses);
+  columnLanes.forEach((lane) => {
+    lane.classList.remove('is-hovered');
+    lane.querySelector('.columns__track')?.classList.remove('is-hovered');
+  });
 
   if (!isAlreadyExpanded) {
     columns.classList.add('is-expanded', className);
@@ -346,7 +372,20 @@ function toggleColumnExpansion(columnName) {
 }
 
 window.addEventListener('scroll', updateColumnScroll, { passive: true });
-window.addEventListener('resize', updateColumnScroll);
+window.addEventListener('resize', () => {
+  updateSiteChrome();
+  updateColumnScroll();
+});
+
+window.addEventListener('load', () => {
+  updateSiteChrome();
+  updateColumnScroll();
+  if (isRecording) {
+    window.scrollTo(0, 0);
+  }
+});
+
+updateSiteChrome();
 updateColumnScroll();
 
 columnLanes.forEach((lane) => {
@@ -361,6 +400,32 @@ columnLanes.forEach((lane) => {
     toggleColumnExpansion(lane.dataset.column);
   });
 });
+
+function initRecordingHover() {
+  if (!document.documentElement.classList.contains('is-recording')) return;
+
+  columnLanes.forEach((lane) => {
+    const track = lane.querySelector('.columns__track');
+    if (!track) return;
+
+    const setHovered = (isHovered) => {
+      if (columns.classList.contains('is-expanded')) {
+        lane.classList.remove('is-hovered');
+        track.classList.remove('is-hovered');
+        return;
+      }
+      lane.classList.toggle('is-hovered', isHovered);
+      track.classList.toggle('is-hovered', isHovered);
+    };
+
+    lane.addEventListener('mouseenter', () => setHovered(true));
+    lane.addEventListener('mouseleave', () => setHovered(false));
+    track.addEventListener('mouseenter', () => setHovered(true));
+    track.addEventListener('mouseleave', () => setHovered(false));
+  });
+}
+
+initRecordingHover();
 
 function showProjectDetails(project) {
   const lane = project.closest('.columns__lane');
