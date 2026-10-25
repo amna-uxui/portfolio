@@ -112,7 +112,7 @@ greeting.addEventListener("click", (event) => {
 
   if (greeting.classList.contains("is-open")) {
     setIntroOpen(false);
-  } else if (event.target === nameButton) {
+  } else if (event.target.closest(".name-button")) {   // the name, its "." or its arrow
     setIntroOpen(true);
   }
 });
@@ -121,6 +121,7 @@ greeting.addEventListener("click", (event) => {
 function setIntroOpen(open) {
   const startHeight = greeting.offsetHeight;   // height before the change
   greeting.classList.toggle("is-open", open);  // CSS swaps the text
+  nameButton.setAttribute("aria-expanded", open); // tells screen readers the intro is open
   const endHeight = greeting.offsetHeight;     // height after the change
 
   greeting.animate(

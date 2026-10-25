@@ -5,17 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Amna Ahmad — Portfolio</title>
 
-  <!-- Fonts: Work Sans (main) and Space Mono (Technology column) -->
+  <!-- Fonts: Work Sans for everything; Space Mono (class="mono") only for the column
+       titles, technical details and numbers -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Mono&family=Work+Sans:wght@400;600&display=swap" rel="stylesheet">
-  <!-- The "←" and "→" arrows aren't in the standard Work Sans download, so load them separately -->
-  <link href="https://fonts.googleapis.com/css2?family=Work+Sans&text=%E2%86%90%E2%86%92&display=swap" rel="stylesheet">
+  <!-- The "←", "→", "↑" and "↓" arrows aren't in the standard Work Sans download, so load them separately -->
+  <link href="https://fonts.googleapis.com/css2?family=Work+Sans&text=%E2%86%90%E2%86%92%E2%86%91%E2%86%93&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="css/variables.css">
-  <link rel="stylesheet" href="css/base.css">
-  <link rel="stylesheet" href="css/home.css">
-  <!-- "?v=2": bump the number after editing this file, so browsers fetch the new copy -->
+  <!-- "?v=…": bump a file's number after editing it, so browsers fetch the new copy -->
+  <link rel="stylesheet" href="css/variables.css?v=3">
+  <link rel="stylesheet" href="css/base.css?v=2">
+  <link rel="stylesheet" href="css/home.css?v=5">
   <link rel="stylesheet" href="css/project-page.css?v=4">
 </head>
 <body>
@@ -28,7 +29,7 @@
   <!-- Greeting strip: clicking "Amna" swaps the short line for the full intro -->
   <div class="greeting">
     <p class="greeting-short">
-      Hi, nice to meet you, I am <button class="name-button" type="button">Amna</button>.
+      Hi, nice to meet you, I am <button class="name-button" type="button" aria-expanded="false"><span class="name-text">Amna</span>.<span class="name-arrow" aria-hidden="true">↓</span></button>
     </p>
 
     <!-- Shown instead of the greeting while a column is open -->
@@ -46,7 +47,7 @@
         <a class="intro-link" href="https://www.logitech.com" target="_blank" rel="noopener">Logitech</a>
         as an AI Creative &amp; Design Technologist. I am also pursuing a Master of Arts
         in Design with a focus on Digital Experience Design at École cantonale d’art
-        de Lausanne (ECAL).
+        de Lausanne (ECAL).<span class="intro-close" aria-hidden="true">↑</span>
       </p>
     </div>
   </div>
@@ -61,12 +62,12 @@
 
         <!-- Short summary, shown on the home view -->
         <div class="column-summary">
-          <h2 class="column-title">UI Design</h2>
+          <h2 class="column-title mono">UI Design</h2>
+          <!-- The three column texts are kept at the same length (40 words each) -->
           <p class="column-text">
-            My design practice sits between visual expression and digital experience.
-            I design digital experiences with a soft spot for details: movement, rhythm,
-            layout, and tiny interactions that make a screen feel alive. For me, design
-            is not just about making things look good, it is about making technology
+            I design digital experiences where visual expression meets function. I have
+            a soft spot for details: movement, rhythm, layout, and the tiny interactions
+            that make a screen feel alive. For me, good design is what makes technology
             feel more human.
           </p>
         </div>
@@ -124,11 +125,12 @@
     <section class="column" data-speed="1" data-name="tech">
       <div class="column-inner">
         <div class="column-summary">
-          <h2 class="column-title">Technology</h2>
-          <p class="column-text column-text--mono">
-            With a foundation in computer science and experience building digital
-            systems, I enjoy transforming abstract ideas into working interfaces that
-            are functional, thoughtful, and grounded in real use.
+          <h2 class="column-title mono">Technology</h2>
+          <p class="column-text">
+            With a background in computer science, I build the systems behind the screens
+            and prototype in code to test how things really behave. I enjoy turning
+            abstract ideas into working interfaces that are functional, thoughtful, and
+            grounded in real use.
           </p>
         </div>
 
@@ -156,13 +158,12 @@
     <section class="column" data-speed="1.4" data-name="ux">
       <div class="column-inner">
         <div class="column-summary">
-          <h2 class="column-title">UX Design</h2>
+          <h2 class="column-title mono">UX Design</h2>
           <p class="column-text">
-            User experience is a backbone of any digital product and I pay close attention
-            to it when I am designing or implementing digital products. Through observation,
-            questioning, testing, and reflection, I explore the relationship between people,
-            technology, and culture. It allows me to move beyond assumptions and design with
-            curiosity, context, and intention.
+            User experience is the backbone of every product I design or build. Through
+            observation, questioning, testing, and reflection, I explore the relationship
+            between people, technology, and culture, so I can move beyond assumptions and
+            design with curiosity, context, and intention.
           </p>
         </div>
 
@@ -205,6 +206,6 @@
 
   </main>
 
-  <script src="js/main.js"></script>
+  <script src="js/main.js?v=2"></script>
 </body>
 </html>

@@ -29,3 +29,9 @@ a {
   color: inherit;
   text-decoration: none;
 }
+
+/* Space Mono, only for technical details and numbers,
+   e.g. <span class="mono">20%</span> inside Work Sans text */
+.mono {
+  font-family: var(--font-mono);
+}

@@ -7,7 +7,7 @@
   --black: #000000;
   --white: #FFFFFF;
 
-  /* Fonts */
+  /* Fonts: Work Sans everywhere; Space Mono only for column titles, technical details and numbers */
   --font-main: "Work Sans", sans-serif;
   --font-mono: "Space Mono", monospace;
 
@@ -16,12 +16,10 @@
   --size-greeting: clamp(18px, 1.35vw, 26px);
   --size-title: clamp(40px, 3.35vw, 64px);   /* column headings */
   --size-body: clamp(30px, 2.7vw, 52px);     /* column text */
-  --size-mono: clamp(26px, 2.4vw, 46px);     /* Technology text */
 
   /* Smaller sizes for the two narrow columns when one column is open */
   --size-title-small: clamp(22px, 1.75vw, 34px);
   --size-body-small: clamp(18px, 1.45vw, 28px);
-  --size-mono-small: clamp(16px, 1.35vw, 26px);
 
   /* Open column: projects intro and list */
   --size-projects: clamp(24px, 2.1vw, 40px);
@@ -29,7 +27,6 @@
   /* Even smaller sizes for the narrow columns while a project page is open */
   --size-title-tiny: clamp(15px, 1.25vw, 26px);
   --size-body-tiny: clamp(12px, 1vw, 20px);
-  --size-mono-tiny: clamp(11px, 0.9vw, 18px);
 
   /* Project pages */
   --size-page-title: clamp(30px, 2.5vw, 48px);        /* project name */
@@ -48,5 +45,7 @@
   --top-bar-height: 50px;
   --greeting-height: 64px;
   --side-padding: clamp(32px, 3.125vw, 60px);
+  --side-padding-narrow: 25px;   /* narrow columns while another column is open */
+  --side-padding-tiny: 16px;     /* narrow columns while a project page is open */
   --divider: 1px solid var(--black);
 }
