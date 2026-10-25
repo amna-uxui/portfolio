@@ -1,0 +1,18 @@
+# Large original files stay on this computer only.
+# The site uses just the optimized copies in the web/ and previews/ folders.
+
+# Project images and videos: ignore originals, keep each project's web/ folder
+/assets/Photo/project Images/**
+!/assets/Photo/project Images/**/
+!/assets/Photo/project Images/**/web/*
+
+# Hover-preview originals (the small copies are in assets/Photo/previews/)
+/assets/Photo/*.*
+
+# Figma design screenshots
+/Pages/
+
+# System files
+Thumbs.db
+desktop.ini
+.DS_Store

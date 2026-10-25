@@ -1,0 +1,232 @@
+<!-- Test, Fail, Fix - Lost & Found
+     Loaded into the UX Design column when the project is clicked (see main.js).
+     Images and videos: assets/Photo/project Images/UX Design/lost&Found/web/
+     ("&" is written as %26 in the paths below) -->
+
+<article class="project-page">
+
+  <!-- Back to the project list -->
+  <button class="page-back" type="button">
+    <span class="page-back-arrow">←</span> Experience Design
+  </button>
+
+  <h1 class="page-title">Test, Fail, Fix - Lost &amp; Found</h1>
+  <p class="page-intro">
+    Test, fail, fix puts UX principles into action, it involves the full process of designing,
+    conducting, and analyzing a user test. Many automated systems rely on users to scan and log
+    physical objects, documents, or data. These interactions involve a human–machine process
+    that must be smooth and self-explanatory. The goal was to design an interface for a scanning
+    machine intended for public spaces, where users place a physical object in a designated
+    area to be scanned.
+  </p>
+
+  <!-- Showcase film: plays silently on a loop (main.js adds its sound button) -->
+  <div class="video-wrap page-video--hero">
+    <video class="page-video" autoplay muted loop playsinline
+           poster="assets/Photo/project%20Images/UX%20Design/lost%26Found/web/showcase-poster.jpg"
+           src="assets/Photo/project%20Images/UX%20Design/lost%26Found/web/showcase.mp4"></video>
+  </div>
+
+  <p class="page-lead">
+    Lost &amp; Found is a speculative tangible-digital system designed to help ECAL students
+    reconnect with lost belongings through object scanning, object recognition, and connected
+    locker storage, giving lost items a better chance of finding their way back home.
+  </p>
+
+  <div class="photo-grid photo-grid--3 page-section">
+    <img src="assets/Photo/project%20Images/UX%20Design/lost%26Found/web/intro-1.webp" alt="Opening a locker in the cardboard prototype">
+    <img src="assets/Photo/project%20Images/UX%20Design/lost%26Found/web/intro-2.webp" alt="A student using the scanning interface">
+    <img src="assets/Photo/project%20Images/UX%20Design/lost%26Found/web/intro-3.webp" alt="A student adjusting the iPad in the prototype">
+  </div>
+
+  <!-- ========== Roles and concept ========== -->
+  <section class="page-section">
+    <h2 class="page-heading page-heading--tight">Roles and Responsibilities:</h2>
+    <p>
+      I partnered with my classmate
+      <a class="text-link" href="https://cindymurier.ch/" target="_blank" rel="noopener">Cindy</a>
+      on this project. We worked side by side on most decisions, but because of tight deadlines,
+      we split ownership based on our strengths: I led user research, turning insights into
+      direction for the design, while Cindy shaped the visual identity and brought the interface
+      to life.
+    </p>
+  </section>
+
+  <section class="page-section">
+    <h2 class="page-heading page-heading--tight">Concept:</h2>
+    <p>
+      This project proposes a scanning system for ECAL students that enables the registration,
+      storage, and retrieval of lost objects through a guided, low-friction interface.
+    </p>
+    <p class="page-paragraph-gap">
+      When an item is found, users scan it, respond to a set of structured prompts, and generate
+      a unique tag. The system then assigns a locker based on the object’s characteristics and
+      sensitivity, where the item is securely stored.
+    </p>
+
+    <!-- The five steps, as blue circles joined by arrows -->
+    <div class="flow">
+      <span class="flow-step">Scan</span>
+      <span class="flow-arrow">→</span>
+      <span class="flow-step">Describe</span>
+      <span class="flow-arrow">→</span>
+      <span class="flow-step">Contact</span>
+      <span class="flow-arrow">→</span>
+      <span class="flow-step">Print tag</span>
+      <span class="flow-arrow">→</span>
+      <span class="flow-step">Leave Object</span>
+    </div>
+
+    <p>
+      Students who have lost an item can interact with the system through guided matching
+      questions to help identify and claim their belongings without relying on open text input
+      or manual searching.
+    </p>
+    <p class="page-paragraph-gap">
+      To support sustainability and reduce long-term accumulation, unclaimed items are redirected
+      to recycling or donation after six months. Users may also optionally provide contact
+      information to enable direct acknowledgment between finder and owner.
+    </p>
+  </section>
+
+  <!-- ========== 1. Tangible prototype ========== -->
+  <section class="page-section">
+    <h2 class="page-heading">1. Tangible Prototype:</h2>
+
+    <!-- The parts it was built from, each with a caption -->
+    <div class="parts parts--first-row">
+      <figure>
+        <img src="assets/Photo/project%20Images/UX%20Design/lost%26Found/web/part-box.webp" alt="IKEA PAPPIS box">
+        <figcaption>1. IKEA PAPPIS boxes</figcaption>
+      </figure>
+      <figure>
+        <!-- Same height, uncropped. --ratio = each image's width / height in pixels -->
+        <div class="same-height">
+          <img style="--ratio: calc(700 / 1244)" src="assets/Photo/project%20Images/UX%20Design/lost%26Found/web/part-frame.webp" alt="3D-printed structural frame">
+          <img style="--ratio: calc(800 / 1067)" src="assets/Photo/project%20Images/UX%20Design/lost%26Found/web/part-handle.webp" alt="Round handle on a cardboard box">
+          <img style="--ratio: calc(454 / 340)" src="assets/Photo/project%20Images/UX%20Design/lost%26Found/web/part-pedestal.webp" alt="Round scanning pedestal">
+        </div>
+        <figcaption>2. Structural frame, handle and pedestal</figcaption>
+      </figure>
+    </div>
+
+    <div class="parts">
+      <figure>
+        <img src="assets/Photo/project%20Images/UX%20Design/lost%26Found/web/part-interface.webp" alt="The interface on an iPad">
+        <figcaption>3. Interface iPad Pro 12.9”</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/Photo/project%20Images/UX%20Design/lost%26Found/web/part-tag.webp" alt="Paper luggage tag">
+        <figcaption>4. Paper luggage tag</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/Photo/project%20Images/UX%20Design/lost%26Found/web/part-strap.webp" alt="Orange Spanset strap">
+        <figcaption>5. Spanset straps</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="page-section">
+    <h2 class="page-heading">1.1. Construction:</h2>
+    <div class="photo-grid photo-grid--4 photo-grid--cropped">
+      <img src="assets/Photo/project%20Images/UX%20Design/lost%26Found/web/build-1.webp" alt="First sketch of the box">
+      <img src="assets/Photo/project%20Images/UX%20Design/lost%26Found/web/build-2.webp" alt="3D model of the box and frame">
+      <img src="assets/Photo/project%20Images/UX%20Design/lost%26Found/web/build-3.webp" alt="Fixing the frame inside a box">
+      <img src="assets/Photo/project%20Images/UX%20Design/lost%26Found/web/build-4.webp" alt="Fitting the iPad into the frame">
+      <img src="assets/Photo/project%20Images/UX%20Design/lost%26Found/web/build-5.webp" alt="Box with its round handle">
+      <img src="assets/Photo/project%20Images/UX%20Design/lost%26Found/web/build-6.webp" alt="iPad and pedestal inside the box">
+      <img src="assets/Photo/project%20Images/UX%20Design/lost%26Found/web/build-7.webp" alt="Assembling the boxes">
+      <img src="assets/Photo/project%20Images/UX%20Design/lost%26Found/web/build-8.webp" alt="The finished wall of lockers">
+    </div>
+  </section>
+
+  <!-- ========== 2. Interface ========== -->
+  <section class="page-section">
+    <h2 class="page-heading">2. Interface:</h2>
+    <h2 class="page-heading">2.1. Interface Element:</h2>
+    <img class="elements elements--left" src="assets/Photo/project%20Images/UX%20Design/lost%26Found/web/elements-1.webp" alt="Interface cards: object card, contact slip and date picker">
+    <img class="elements elements--right" src="assets/Photo/project%20Images/UX%20Design/lost%26Found/web/elements-2.webp" alt="Interface cards: register card, scanning, description and record">
+  </section>
+
+  <section class="page-section">
+    <h2 class="page-heading">2.2. Working Prototype:</h2>
+    <!-- iPad screen recording: plays silently on a loop (no sound, so no sound button) -->
+    <video class="page-centered-image" autoplay muted loop playsinline
+           poster="assets/Photo/project%20Images/UX%20Design/lost%26Found/web/prototype-poster.jpg"
+           src="assets/Photo/project%20Images/UX%20Design/lost%26Found/web/prototype.mp4"></video>
+  </section>
+
+  <!-- ========== 3. UX research ========== -->
+  <section class="page-section">
+    <h2 class="page-heading">3. UX Research:</h2>
+    <h2 class="page-heading">3.1. Research Plan</h2>
+    <img class="page-wide-image" src="assets/Photo/project%20Images/UX%20Design/lost%26Found/web/research-plan.webp" alt="Research plan: goals, questions, methods, equipment and recruitment">
+
+    <h2 class="page-heading">3.2. Usability Test Procedure</h2>
+    <img class="page-wide-image" src="assets/Photo/project%20Images/UX%20Design/lost%26Found/web/test-procedure.webp" alt="Test procedure and scenario">
+
+    <h2 class="page-heading">3.3. Testing Session</h2>
+    <div class="photo-grid photo-grid--2 photo-grid--cropped page-section">
+      <img src="assets/Photo/project%20Images/UX%20Design/lost%26Found/web/test-1.webp" alt="The test room with the locker prototype">
+      <img src="assets/Photo/project%20Images/UX%20Design/lost%26Found/web/test-2.webp" alt="A participant filling in the consent form">
+      <img src="assets/Photo/project%20Images/UX%20Design/lost%26Found/web/test-3.webp" alt="A participant answering the questionnaire">
+      <img src="assets/Photo/project%20Images/UX%20Design/lost%26Found/web/test-4.webp" alt="A participant reading the interface">
+      <img src="assets/Photo/project%20Images/UX%20Design/lost%26Found/web/test-5.webp" alt="A participant placing an object">
+      <img src="assets/Photo/project%20Images/UX%20Design/lost%26Found/web/test-6.webp" alt="A participant looking at the scanner">
+    </div>
+
+    <h2 class="page-heading">3.4. Testing session outcome</h2>
+    <img class="page-wide-image" src="assets/Photo/project%20Images/UX%20Design/lost%26Found/web/testing-outcomes.webp" alt="Observations from each participant">
+
+    <h2 class="page-heading">
+      3.5 Affinity Diagram
+      <span class="page-heading-note">- Grouping outcomes according to our research goals.</span>
+    </h2>
+    <img class="page-wide-image" src="assets/Photo/project%20Images/UX%20Design/lost%26Found/web/affinity-diagram.webp" alt="Affinity diagram grouping the outcomes">
+  </section>
+
+  <!-- ========== 4. Insights ========== -->
+  <section class="page-section">
+    <h2 class="page-heading">4. Insights (Some)</h2>
+    <div class="insights">
+      <div class="insight insight--center">
+        <h3>Concept</h3>
+        <p>Everyone liked and trusted the concept, but suggested some minor but significant improvements to make it even better.</p>
+      </div>
+      <div class="insight">
+        <h3>Minor Interface Improvement</h3>
+        <p>Reducing unnecessary information on some screens while providing clearer guidance on other. Additionally, increasing button sizes and improving their visual prominence to make them more recognizable</p>
+      </div>
+      <div class="insight">
+        <h3>Accessibility of Digital Interface</h3>
+        <p>The vertical text on the interface requires a more refined design solution. Additionally, conducting accessibility evaluations on color contrast and typography would further improve the overall usability and readability of the interface.</p>
+      </div>
+      <div class="insight">
+        <h3>Cognitive Overload</h3>
+        <p>It is worth noting that three participants reported a moderate level of cognitive load. Only one participant gave a highly positive rating, while the remaining participants expressed satisfaction with the system’s affordances.</p>
+      </div>
+      <div class="insight insight--center">
+        <h3>Tapping student card</h3>
+        <p>Many participants struggled to understand the concept of tapping the student card, as the purpose and required steps were not immediately clear. Providing clearer instructions and stronger visual cues would help.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 5. Before vs after ========== -->
+  <section>
+    <h2 class="page-heading">5. Before vs After</h2>
+    <figure class="page-figure">
+      <img src="assets/Photo/project%20Images/UX%20Design/lost%26Found/web/before-after-1.webp" alt="Buttons before and after">
+      <figcaption>1. Making buttons appear more interactive</figcaption>
+    </figure>
+    <figure class="page-figure">
+      <img src="assets/Photo/project%20Images/UX%20Design/lost%26Found/web/before-after-2.webp" alt="Register card before and after">
+      <figcaption>2. Reducing Un-necessary details from the interface</figcaption>
+    </figure>
+    <figure class="page-figure">
+      <img src="assets/Photo/project%20Images/UX%20Design/lost%26Found/web/before-after-3.webp" alt="Contact slip before and after">
+      <figcaption>3. Improving tapping card scenario</figcaption>
+    </figure>
+  </section>
+
+</article>

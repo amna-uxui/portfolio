@@ -1,0 +1,182 @@
+<!-- UNICOS Branding - Framework
+     Loaded into the UI Design column when the project is clicked (see main.js).
+     Images: assets/Photo/project Images/UI Design/UNICOS/web/ -->
+
+<article class="project-page">
+
+  <!-- Back to the project list -->
+  <button class="page-back" type="button">
+    <span class="page-back-arrow">←</span> Design projects
+  </button>
+
+  <h1 class="page-title">UNICOS Branding - Framework</h1>
+  <p class="page-intro">
+    UNICOS was born at CERN in early 2001 with the development of the LHC cryogenics
+    control system. It deals with the two upper layers of a classical control system:
+    Supervision and Control. UNICOS proposes a method to design and develop the control
+    application which will run in commercial off-the-shelf products (e.g. SCADA and PLCs).
+  </p>
+
+  <img class="page-hero" src="assets/Photo/project%20Images/UI%20Design/UNICOS/web/header.webp" alt="The LHC tunnel at CERN">
+
+  <!-- Problem statement | Solution -->
+  <section class="page-split">
+    <div>
+      <h2 class="page-heading">Problem statement</h2>
+      <p>
+        The UNICOS HMI was developed more than 15 years ago and has since then evolved
+        with contributions of tons of developers. The overall set of panels constituting
+        the UNICOS HMI is therefore outdated and heterogeneous. CERN wishes to modernize
+        and homogenize the UNICOS user experience for its open source release by first
+        updating and unifying its visual identity.
+      </p>
+    </div>
+    <div>
+      <h2 class="page-heading">Solution</h2>
+      <p>
+        The primary objective of the rebranding is to systematically upgrade the visual
+        aesthetics of all Human-Machine Interface (HMI) panels, bringing them in line with
+        modern design standards. This initiative is crucial for improving both the usability
+        and visual appeal of the system, ensuring that it remains competitive and
+        user-friendly in today's fast-evolving technological landscape.
+      </p>
+    </div>
+  </section>
+
+  <!-- Problems (left) with screenshots of the old HMI (right) -->
+  <section class="page-split">
+    <div>
+      <h2 class="page-heading">Identifying problems in existing HMI</h2>
+
+      <h3 class="page-subheading">1. Complex Interface</h3>
+      <p>
+        The existing interface is complicated as key functionalities are buried within
+        complex menus, making it challenging for users to complete tasks efficiently.
+      </p>
+
+      <h3 class="page-subheading">2. Color Assignment</h3>
+      <p>
+        In UNICOS, colors play a critical role as the framework is designed to represent
+        the real-time status of various alarms and events. Therefore, establishing a
+        well-defined and consistent color database is essential to ensure clarity and
+        effectiveness.
+      </p>
+
+      <h3 class="page-subheading">3. Visual In-Consistency</h3>
+      <p>
+        In UNICOS, colors play a critical role as the framework is designed to represent
+        the real-time status of various alarms and events. Therefore, establishing a
+        well-defined and consistent color database is essential to ensure clarity and
+        effectiveness.
+      </p>
+
+      <h3 class="page-subheading">4. Non-resizable panels</h3>
+      <p>
+        The panels within the UNICOS interface are designed with a fixed layout that does
+        not adapt to different screen sizes or resolutions. This can lead to usability
+        challenges, especially for users accessing the system on various devices, such as
+        laptops, or desktop.
+      </p>
+
+      <h3 class="page-subheading">5. Usability Problems</h3>
+      <p>
+        Inconsistent design elements (e.g., buttons, icons, color schemes) across different
+        modules create confusion and reduce user confidence.
+      </p>
+    </div>
+
+    <div class="page-images">
+      <img src="assets/Photo/project%20Images/UI%20Design/UNICOS/web/problem-1.webp" alt="Old UNICOS welcome panel">
+      <img src="assets/Photo/project%20Images/UI%20Design/UNICOS/web/problem-2.webp" alt="Old UNICOS system integrity panel">
+      <img src="assets/Photo/project%20Images/UI%20Design/UNICOS/web/problem-3.webp" alt="Old UNICOS application configuration panel">
+    </div>
+  </section>
+
+  <!-- User research sticky notes (built in HTML/CSS so they stay sharp) -->
+  <section class="page-split page-split--centered">
+
+    <div class="notes">
+      <div class="note note--blue note--big">
+        <strong class="note-title">User’s<br>Pain points</strong>
+        after conducting interviews with users, we have following conclusions
+      </div>
+      <div class="note note--grey note--tucked">
+        We don’t have the legal rights to use these pictures.
+        <span class="note-alert">Copy right issue</span>
+      </div>
+      <div class="note">Navigation is not easy. The framework is not easy to understand for new users.</div>
+      <div class="note">All the pictures should be replaced with customized icons. Pictures are causing usability issues since they are not relative to the functionality.</div>
+      <div class="note">The panels are complex and due to lack of visual hierarchy and UI consistency, performing tasks is not easy.</div>
+      <div class="note note--bold">Panels are not resizable. Panels should adjust according to the device dimensions.</div>
+      <div class="note">Panels lack visual consistency hence branding guidelines should be made that will be use for developing future panels.</div>
+      <div class="note">Color usage should be defined. Certain colors are associated with certain stages, such as alarms.</div>
+    </div>
+
+    <div class="notes">
+      <div class="note note--orange note--big">
+        <strong class="note-title">User’s<br>Expectations</strong>
+      </div>
+      <div class="note"><strong>Don’t re-invent the wheel.</strong> Layout should not be disturbed since users are used to certain placement of graphical elements</div>
+      <div class="note"><strong>Simplicity, Consistency and Usability.</strong> Redesign should be minimalistic, unnecessary 3d elements and random colors should be avoided.</div>
+      <div class="note note--bold">A well-designed, fully functional framework is far superior to an aesthetically pleasing but flawed one.</div>
+    </div>
+
+  </section>
+
+  <!-- Research questions -->
+  <div class="page-questions">
+    <p>→ How can we design a system that not only solve the current issues but is also helpful in future?</p>
+    <p>→ How can we redesign this framework without changing existing layout?</p>
+  </div>
+
+  <hr class="page-divider">
+
+  <!-- Branding guidelines: sideways gallery (mouse wheel scrolls it left/right) -->
+  <section>
+    <h2 class="page-heading">Branding Guidelines:</h2>
+    <div class="gallery">
+      <img src="assets/Photo/project%20Images/UI%20Design/UNICOS/web/branding-1.webp" alt="Icon library: old icons next to the new icons">
+      <img src="assets/Photo/project%20Images/UI%20Design/UNICOS/web/branding-2.webp" alt="Panel layout and colour palette">
+      <img src="assets/Photo/project%20Images/UI%20Design/UNICOS/web/branding-3.webp" alt="Tables, sections and other components">
+      <img src="assets/Photo/project%20Images/UI%20Design/UNICOS/web/branding-4.webp" alt="Dark mode specification">
+      <img src="assets/Photo/project%20Images/UI%20Design/UNICOS/web/branding-5.webp" alt="Dark mode tables, sections and components">
+      <img src="assets/Photo/project%20Images/UI%20Design/UNICOS/web/branding-6.webp" alt="Typography: Noto Sans">
+    </div>
+  </section>
+
+  <!-- Mockups: before (left) and after (right) -->
+  <section>
+    <h2 class="page-heading">Mockups: Before vs After</h2>
+    <div class="page-split">
+      <img src="assets/Photo/project%20Images/UI%20Design/UNICOS/web/before-1.webp" alt="Import devices panel, before">
+      <img src="assets/Photo/project%20Images/UI%20Design/UNICOS/web/after-1.webp" alt="Import devices panel, after">
+      <img src="assets/Photo/project%20Images/UI%20Design/UNICOS/web/before-2.webp" alt="Device overview panel, before">
+      <img src="assets/Photo/project%20Images/UI%20Design/UNICOS/web/after-2.webp" alt="Device overview panel, after">
+    </div>
+  </section>
+
+  <hr class="page-divider">
+
+  <section>
+    <h2 class="page-heading">What has improved?</h2>
+    <ul class="page-bullets">
+      <li>Homogeneous Modern Design</li>
+      <li>Customized Icons library</li>
+      <li>Enhanced Focus on User Experience and Usability</li>
+      <li>Unified UNICOS Branding Document</li>
+      <li>Panels are now resizable</li>
+      <li>Dark Mode Implementation</li>
+    </ul>
+    <!-- Same height, uncropped. --ratio = each image's width / height in pixels -->
+    <div class="same-height">
+      <img style="--ratio: calc(1624 / 1132)" src="assets/Photo/project%20Images/UI%20Design/UNICOS/web/dark-mode.webp" alt="Redesigned panel in dark mode">
+      <img style="--ratio: calc(1069 / 994)" src="assets/Photo/project%20Images/UI%20Design/UNICOS/web/improvement.webp" alt="Redesigned front-end diagnostic panel">
+    </div>
+  </section>
+
+  <!-- Opens the Technology column (its implementation page comes later) -->
+  <a class="page-link" href="#" data-goto="tech">
+    → Click here to see how I implemented these mockups in WinCC OA using control script and QT CSS.
+  </a>
+
+</article>

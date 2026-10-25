@@ -1,0 +1,861 @@
+/* Project pages (files in projects/, loaded into an open column by main.js) */
+
+/* ---------- Showing and hiding the page ---------- */
+/* Hidden until a project is clicked */
+.column-page {
+  display: none;
+  /* Laid out at the final width from the start, so text doesn't
+     jump between lines while the column is widening */
+  width: calc(100vw * 8 / 10 - 2 * var(--side-padding));
+}
+
+/* Page open (class added by main.js): list hidden, page fades in */
+.column.shows-page .column-projects {
+  display: none;
+}
+
+.column.shows-page .column-page {
+  display: block;
+  animation: projects-in 0.7s ease-out 0.1s both;   /* keyframes in home.css */
+}
+
+/* ---------- Page layout ---------- */
+/* No extra gap after the last section; the column's own padding is enough */
+.project-page > :last-child,
+.project-page > :last-child > :last-child {
+  margin-bottom: 0;
+}
+
+.project-page img {
+  display: block;
+  max-width: 100%;
+}
+
+.project-page p,
+.project-page li {
+  font-size: var(--size-page-body);
+  line-height: 1.17;
+}
+
+/* "← Design projects": back to the project list */
+.page-back {
+  font: inherit;
+  font-size: var(--size-title);
+  color: var(--blue);
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-bottom: 0.3em;
+}
+
+.page-back-arrow {
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.page-back:hover .page-back-arrow {
+  transform: translateX(-6px);   /* arrow nudges left on hover */
+}
+
+.page-title {
+  font-size: var(--size-page-title);
+  font-weight: 400;
+  color: var(--blue);
+  margin-bottom: 0.7em;
+}
+
+.page-hero {
+  width: 100%;
+  aspect-ratio: 1400 / 714;
+  object-fit: cover;             /* crop to the design's shape */
+  margin: var(--space-block) 0;
+}
+
+/* Section headings, e.g. "Problem statement" */
+.page-heading {
+  font-size: var(--size-page-heading);
+  font-weight: 400;
+  color: var(--blue);
+  margin-bottom: 1.2em;
+}
+
+/* Numbered problems, e.g. "1. Complex Interface" */
+.page-subheading {
+  font-size: var(--size-page-subheading);
+  font-weight: 400;
+  margin: 1.6em 0 0.6em;
+}
+
+/* Two side-by-side columns */
+.page-split {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);   /* always two equal halves */
+  gap: 60px 10%;                 /* row gap, column gap */
+  align-items: start;
+  margin-bottom: var(--space-block);
+}
+
+.page-split--centered {
+  align-items: center;           /* sticky notes: line up their middles */
+}
+
+/* Smaller gaps, for grids of images */
+.page-split--tight {
+  gap: 32px 48px;
+}
+
+/* A row of images that all end up the same height, uncropped.
+   Give each image style="--ratio: calc(<width> / <height>)" (its size in pixels): wider images
+   get a bigger share of the row, which evens out their heights. */
+.same-height {
+  display: flex;
+  gap: 30px;
+  align-items: flex-start;
+  margin-bottom: var(--space-block);
+}
+
+.same-height > * {
+  flex: var(--ratio) 1 0;
+  min-width: 0;
+}
+
+/* Thin outline for screenshots with white edges
+   (an outline, not a border, so it doesn't change the image's size) */
+.bordered {
+  outline: 1px solid #999;
+  outline-offset: -1px;
+}
+
+/* Videos and full-width images */
+.page-video,
+.page-wide-image {
+  width: 100%;
+  margin-bottom: var(--space-block);
+}
+
+.page-video {
+  display: block;
+  background: var(--black);      /* shown for a moment before the video loads */
+}
+
+/* Video with a sound button in its bottom-right corner (button added by main.js) */
+.video-wrap {
+  position: relative;
+  margin-bottom: var(--space-block);
+}
+
+.video-wrap .page-video,
+.page-split .video-wrap {
+  margin-bottom: 0;              /* the wrap or the grid handles the spacing */
+}
+
+.page-video--hero {
+  margin: var(--space-block) 0;
+}
+
+/* Round, semi-transparent button with a speaker icon */
+.sound-button {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;           /* icon in the middle */
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.sound-button:hover,
+.sound-button:focus-visible {
+  background: rgba(255, 255, 255, 0.95);
+}
+
+.sound-icon {
+  width: 24px;
+  height: 24px;
+}
+
+/* Outline speaker = sound off, filled speaker = sound on */
+.sound-button .sound-icon--on,
+.sound-button.is-on .sound-icon--off {
+  display: none;
+}
+
+.sound-button.is-on .sound-icon--on {
+  display: block;
+}
+
+/* ---------- Pieces used on pages with several projects (e.g. ECAL) ---------- */
+/* A second project title further down the page gets space above it */
+.page-title:not(:first-of-type) {
+  margin-top: var(--space-block);
+}
+
+/* Media right under an intro paragraph */
+.page-media-top {
+  margin-top: var(--space-block);
+}
+
+/* Headings that sit close to the text below them */
+.page-heading--tight {
+  margin-bottom: 0.6em;
+}
+
+/* A big blue question */
+.project-page .page-question {
+  color: var(--blue);
+  font-size: var(--size-page-heading);
+  margin-bottom: var(--space-block);
+}
+
+.page-paragraph-gap {
+  margin-top: 1.2em;
+}
+
+/* Three phone screens in a row; the middle one sits higher */
+.screens {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin: var(--space-block) 0;
+}
+
+.screens img {
+  width: 28%;
+  margin-top: 5%;
+}
+
+.screens img:nth-child(2) {
+  margin-top: 0;
+}
+
+/* Three text columns ("How it works?") */
+.page-three {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6%;
+  margin-bottom: var(--space-block);
+}
+
+.page-label {
+  font-size: var(--size-page-body);
+  font-weight: 600;
+}
+
+/* ---------- Pieces used on long case studies (e.g. Lost & Found) ---------- */
+/* Space between the big numbered sections */
+.page-section {
+  margin-bottom: var(--space-block);
+}
+
+/* A larger paragraph that sums up the project */
+.project-page .page-lead {
+  font-size: var(--size-projects);
+  line-height: 1.4;
+  max-width: 95%;
+  margin: var(--space-block) 0;
+}
+
+/* Black note after a blue heading, e.g. "- Grouping outcomes…" */
+.page-heading-note {
+  color: var(--black);
+}
+
+/* Photo grids with 2, 3 or 4 columns */
+.photo-grid {
+  display: grid;
+  gap: 24px;
+}
+
+.photo-grid img {
+  width: 100%;
+}
+
+.photo-grid--2 { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 48px; }
+.photo-grid--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 48px; }
+.photo-grid--4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+/* Crop all photos in the grid to the same portrait shape */
+.photo-grid--cropped img {
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+}
+
+/* Steps as blue circles joined by arrows */
+.flow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: var(--space-block) 3%;
+}
+
+.flow-step {
+  width: 12%;
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  padding: 0.5em;
+  border-radius: 50%;
+  background: var(--blue);
+  color: var(--white);
+  font-size: var(--size-page-body);
+  text-align: center;
+  line-height: 1.3;
+}
+
+.flow-arrow {
+  font-size: clamp(32px, 3vw, 56px);
+}
+
+/* Prototype parts: images with centred captions */
+.parts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6%;
+  align-items: start;
+  margin-bottom: var(--space-block);
+}
+
+.parts--first-row {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2.7fr);
+  align-items: end;
+}
+
+.parts figure img {
+  margin: 0 auto;                /* centre each image in its column */
+}
+
+.parts figcaption {
+  margin-top: 24px;
+  text-align: center;
+}
+
+.parts .same-height {
+  margin-bottom: 0;
+}
+
+/* Interface element collages: one on the left, one further right */
+.elements {
+  max-width: 62%;
+}
+
+.elements--left {
+  margin-left: 4%;
+}
+
+.elements--right {
+  margin: 40px 0 0 auto;
+}
+
+/* Insight cards: beige, blue outline, solid shadow */
+.insights {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 60px 3%;
+}
+
+.insight {
+  padding: 1.5em 1.3em;
+  background: var(--beige);
+  border: 2px solid var(--blue);
+  box-shadow: 4px 4px 0 #0E0060;
+}
+
+/* Sits alone on its row, centred, one card wide */
+.insight--center {
+  grid-column: 1 / -1;
+  justify-self: center;
+  width: calc((100% - 2 * 3%) / 3);
+}
+
+.insight h3 {
+  font-size: var(--size-page-body);
+  font-weight: 500;
+  margin-bottom: 0.5em;
+}
+
+.project-page .insight p {
+  font-size: clamp(14px, 1.05vw, 20px);
+  line-height: 1.4;
+}
+
+/* A single image or video centred on the page, e.g. the working prototype */
+.page-centered-image {
+  display: block;
+  width: 45%;
+  margin: 0 auto;
+}
+
+/* Full-width image with a centred caption */
+.page-figure {
+  margin-bottom: var(--space-block);
+}
+
+.page-figure img {
+  width: 100%;
+}
+
+.page-figure figcaption {
+  text-align: center;
+}
+
+/* ---------- Pieces used on the Reality Check (Duolingo) page ---------- */
+/* Photo on the left, text on the right */
+.page-split--photo-left {
+  grid-template-columns: minmax(0, 0.39fr) minmax(0, 0.61fr);
+  column-gap: 60px;
+}
+
+/* Heading with no gap below it (a subtitle follows right away) */
+.page-heading--flush {
+  margin-bottom: 0;
+}
+
+/* Big black subtitles in the design proposal, e.g. "1- Understanding users…" */
+.proposal-title {
+  max-width: 69%;                /* narrower, so longer titles wrap like the design */
+  font-size: var(--size-page-heading);
+  font-weight: 400;
+  line-height: 1.17;
+  margin: 1.2em 0 1.4em;
+}
+
+/* Two key findings in slightly larger text */
+.project-page .page-statements p {
+  font-size: var(--size-page-subheading);
+  max-width: 80%;
+  margin-bottom: 1.2em;
+}
+
+/* The four insights as beige circles in a row */
+.insight-circles {
+  display: flex;
+  justify-content: center;
+  gap: 2.5%;
+  margin: var(--space-block) 0;
+}
+
+.insight-circle {
+  width: 20%;
+  aspect-ratio: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+  padding: 1.5em;
+  border-radius: 50%;
+  background: var(--beige);
+  font-size: var(--size-page-body);
+  text-align: center;
+  line-height: 1.2;
+}
+
+.insight-circle strong {
+  font-weight: 500;
+}
+
+/* The big "How might Duolingo…" question */
+.project-page .page-big-question {
+  font-size: var(--size-page-title);
+  line-height: 1.17;
+  margin-bottom: var(--space-block);
+}
+
+/* Persona cards, lined up on the right like the design */
+.personas {
+  display: flex;
+  justify-content: flex-end;
+  gap: 3%;
+}
+
+.personas img {
+  width: 20%;
+}
+
+/* Blue highlighted words inside a paragraph */
+.highlight {
+  color: var(--blue);
+}
+
+/* ---------- Pieces used on the ED Workshops page ---------- */
+/* Larger intro under the first title (ECAL admission workshop) */
+.project-page .page-intro--large {
+  font-size: var(--size-page-subheading);
+  margin-bottom: var(--space-block);
+}
+
+.page-intro--large strong {
+  font-weight: 600;
+}
+
+/* Current workflow, with the "Our focus" note in its empty bottom-right corner */
+.workflow-focus {
+  position: relative;
+  width: 93%;                    /* 1306 of the 1400px column, like the design */
+  margin: 0 auto;
+}
+
+.workflow-focus img {
+  width: 100%;
+}
+
+.project-page .workflow-focus-note {
+  position: absolute;
+  left: 65%;
+  top: 86%;                      /* just under the tip of the blue arrow */
+  font-size: var(--size-page-subheading);
+}
+
+/* Captions a little closer to their photos */
+.photo-grid--captions figcaption {
+  margin-top: 24px;
+}
+
+/* Workshop steps: same space above and below each step heading */
+.page-subheading--step {
+  margin: var(--space-block) 0;
+}
+
+.page-subheading--step:first-of-type {
+  margin-top: 0;                 /* sits right under "During the workshop:" */
+}
+
+/* Step photos and the insights board, lined up on the right like the design */
+.step-image,
+.board-image {
+  margin-left: auto;
+}
+
+.step-image  { width: 91%; }     /* 1271 of 1400px */
+.board-image { width: 84%; }     /* 1179 of 1400px */
+
+/* Pain points → solutions diagram (SVG drawn at 1400px wide, scaled to the column) */
+.insights-map {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-bottom: var(--space-block);
+}
+
+.insights-map text {
+  font-size: 24px;               /* SVG units, so it scales with the diagram */
+  dominant-baseline: central;
+}
+
+.insights-map .label {
+  font-size: 32px;
+}
+
+.insights-map .label:first-of-type {
+  text-anchor: middle;           /* "Solutions", centred over the blue boxes */
+}
+
+.insights-map .pain     { fill: #FFA8AB; }
+.insights-map .solution { fill: #8AD6FF; }
+
+.insights-map line,
+.insights-map marker path {
+  fill: none;
+  stroke: var(--black);
+  stroke-width: 1.5;
+}
+
+.insights-map .line--blue,
+.insights-map .arrow--blue path {
+  stroke: var(--blue);
+}
+
+/* The four brief steps: picture on top, name and description below */
+.brief-steps {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 3%;
+  margin-top: var(--space-block);
+}
+
+.brief-steps img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: contain;           /* whole picture visible, all boxes the same size */
+}
+
+.brief-steps figcaption {
+  margin-top: 24px;
+}
+
+.brief-steps strong {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 0.8em;
+}
+
+/* Mascot evolution: three pictures with arrows between them */
+.mascot-steps {
+  display: flex;
+  align-items: center;
+  gap: 2%;
+  margin: var(--space-block) 0;
+}
+
+.mascot-steps img {
+  flex: 1;
+  min-width: 0;
+}
+
+.mascot-arrow {
+  font-size: clamp(32px, 3vw, 56px);
+}
+
+/* ---------- Pieces used on the Randox page ---------- */
+/* Wider version of the centred image (e.g. the three phones at the top) */
+.page-centered-image--wide {
+  width: 80%;
+}
+
+/* Bullet list that follows its intro line with no gap */
+.page-bullets--tight {
+  margin-bottom: 0;
+}
+
+/* Four phone screens in a row */
+.phone-screens {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 4.3%;
+}
+
+.phone-screens img {
+  width: 100%;
+}
+
+/* Rows of flow screens; "--end" rows line up on the right */
+.flow-screens-row {
+  display: flex;
+  gap: 1.45%;
+  margin-bottom: var(--space-block);
+}
+
+.flow-screens-row img {
+  width: 20.3%;
+}
+
+.flow-screens-row--end {
+  justify-content: flex-end;
+}
+
+/* Bold labels at the start of list items */
+.page-bullets strong {
+  font-weight: 500;
+}
+
+/* ---------- Pieces used on the eCareDocta page ---------- */
+/* Beige panel with blue cards: two on top, one centred below */
+.highlights {
+  display: grid;
+  grid-template-columns: 31% 31%;
+  justify-content: space-between;
+  row-gap: 32px;
+  padding: 3.5% 4%;
+  background: var(--beige);
+}
+
+.project-page .highlight-card {
+  padding: 1.6em 1.3em;
+  border-radius: 10px;
+  background: var(--blue);
+  color: var(--white);
+  font-size: var(--size-page-body);
+  line-height: 1.2;
+}
+
+.highlight-card--center {
+  grid-column: 1 / -1;
+  justify-self: center;
+  width: 31%;                    /* same width as the cards above */
+}
+
+/* Three illustrated features with a title and description */
+.features {
+  display: grid;
+  grid-template-columns: repeat(3, 23%);
+  column-gap: 7%;
+  margin-top: var(--space-block);
+}
+
+.features img {
+  width: 100%;
+}
+
+.features figcaption {
+  margin-top: 24px;
+}
+
+.features strong {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 0.6em;
+}
+
+/* Doctor phone, a bit smaller and centred in its half */
+.doctor-phone {
+  width: 70%;
+  margin: 0 auto;
+}
+
+/* Image captions */
+figcaption {
+  margin-top: 40px;
+  font-size: var(--size-page-body);
+  line-height: 1.17;
+}
+
+/* Underlined link inside a paragraph */
+.text-link {
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+.text-link:hover {
+  color: var(--blue);
+}
+
+/* Stacked screenshots next to the problems */
+.page-images {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+/* ---------- Sticky notes ---------- */
+/* Three notes per row; the first (title) note is bigger and spans two */
+.notes {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(8px, 0.95vw, 18px);   /* tighter on smaller screens */
+}
+
+.note {
+  --note-color: #FFAB9F;         /* salmon */
+  --fold-color: #FF8A5C;         /* folded corner */
+  position: relative;
+  aspect-ratio: 1;
+  padding: 11%;
+  background: var(--note-color);
+  font-size: clamp(9px, 0.68vw, 13px);
+  line-height: 1.35;
+  color: #333;
+  /* Cut the bottom-right corner off... */
+  clip-path: polygon(0 0, 100% 0, 100% 86%, 86% 100%, 0 100%);
+}
+
+/* ...and fill it with a darker triangle, like a folded corner */
+.note::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 14%;
+  height: 14%;
+  background: var(--fold-color);
+  clip-path: polygon(0 0, 100% 0, 0 100%);
+}
+
+.note strong {
+  display: block;
+  margin-bottom: 0.8em;
+}
+
+.note--blue   { --note-color: #7EC4FF; --fold-color: #3D9BFF; }
+.note--orange { --note-color: #FFC46E; --fold-color: #FF9E2C; }
+.note--grey   { --note-color: #AEB9CC; --fold-color: #8795AE; }
+
+/* Title notes: a bit bigger than the others, centered over two columns */
+.note--big {
+  grid-column: span 2;
+  justify-self: center;
+  width: 70%;
+  padding: 10%;
+}
+
+.note-title {
+  font-size: 1.6em;
+  line-height: 1.2;
+}
+
+/* Grey note sits next to the blue one, lowered a little */
+.note--tucked {
+  align-self: end;
+  transform: translateY(20%);
+}
+
+.note-alert {
+  display: block;
+  margin-top: 1em;
+  color: #E0301E;
+}
+
+/* Key findings: bold and a bit larger */
+.note--bold {
+  font-weight: 600;
+  font-size: clamp(10px, 0.8vw, 15px);
+}
+
+/* Research questions */
+.page-questions {
+  max-width: 80%;
+}
+
+.page-questions p {
+  font-size: var(--size-page-heading);
+  margin-bottom: 0.8em;
+}
+
+.page-divider {
+  border: none;
+  border-top: var(--divider);
+  margin: var(--space-block) 0;
+}
+
+/* Sideways gallery: the mouse wheel scrolls it left/right (see main.js) */
+.gallery {
+  display: flex;
+  gap: 24px;
+  overflow-x: auto;
+  scrollbar-width: none;         /* hide scrollbar (Firefox) */
+  margin-bottom: var(--space-block);
+}
+
+.gallery::-webkit-scrollbar {
+  display: none;                 /* hide scrollbar (Chrome, Edge, Safari) */
+}
+
+.gallery img {
+  height: clamp(360px, 41vw, 790px);
+  max-width: none;               /* keep full size so the gallery can scroll */
+  flex-shrink: 0;
+}
+
+.page-bullets {
+  padding-left: 1.4em;
+  margin-bottom: 48px;
+}
+
+/* Closing link to another project */
+.page-link {
+  display: inline-block;
+  max-width: 80%;                /* the block above already leaves 64px */
+  font-size: var(--size-page-heading);
+  line-height: 1.17;
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+  transition: color 0.3s ease;
+}
+
+.page-link:hover {
+  color: var(--blue);
+}

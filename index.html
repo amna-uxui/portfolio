@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Amna Ahmad — Portfolio</title>
+
+  <!-- Fonts: Work Sans (main) and Space Mono (Technology column) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono&family=Work+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <!-- The "←" and "→" arrows aren't in the standard Work Sans download, so load them separately -->
+  <link href="https://fonts.googleapis.com/css2?family=Work+Sans&text=%E2%86%90%E2%86%92&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/home.css">
+  <link rel="stylesheet" href="css/project-page.css">
+</head>
+<body>
+
+  <!-- Top bar: CV download -->
+  <header class="top-bar">
+    <a class="cv-link" href="assets/AmnaAhmad_CV.pdf" download>Download CV</a>
+  </header>
+
+  <!-- Greeting strip: clicking "Amna" swaps the short line for the full intro -->
+  <div class="greeting">
+    <p class="greeting-short">
+      Hi, nice to meet you, I am <button class="name-button" type="button">Amna</button>.
+    </p>
+
+    <!-- Shown instead of the greeting while a column is open -->
+    <button class="back-button" type="button">← Go back</button>
+
+    <!-- Full intro, hidden until "Amna" is clicked -->
+    <div class="intro">
+      <p class="intro-text">
+        Hi, nice to meet you! I’m Amna, a computer engineer turned digital experience
+        designer with nearly four years of professional experience across research,
+        technology, and startup environments. I previously worked at
+        <a class="intro-link" href="https://home.cern" target="_blank" rel="noopener">CERN</a>,
+        where I contributed to the design of complex industrial systems, and I am
+        currently working at
+        <a class="intro-link" href="https://www.logitech.com" target="_blank" rel="noopener">Logitech</a>
+        as an AI Creative &amp; Design Technologist. I am also pursuing a Master of Arts
+        in Design with a focus on Digital Experience Design at École cantonale d’art
+        de Lausanne (ECAL).
+      </p>
+    </div>
+  </div>
+
+  <!-- Three columns.
+       data-speed: how fast each one scrolls (1 = normal)
+       data-name:  used to widen the right column when it's clicked -->
+  <main class="columns">
+
+    <section class="column" data-speed="0.6" data-name="ui">
+      <div class="column-inner">
+
+        <!-- Short summary, shown on the home view -->
+        <div class="column-summary">
+          <h2 class="column-title">UI Design</h2>
+          <p class="column-text">
+            My design practice sits between visual expression and digital experience.
+            I design digital experiences with a soft spot for details: movement, rhythm,
+            layout, and tiny interactions that make a screen feel alive. For me, design
+            is not just about making things look good, it is about making technology
+            feel more human.
+          </p>
+        </div>
+
+        <!-- Projects, shown when this column is clicked -->
+        <div class="column-projects">
+          <h2 class="column-title">Design projects</h2>
+          <p class="projects-intro">
+            Over the years, I’ve worked on a variety of projects that showcase my
+            creativity and a passion for building meaningful design, ranging from
+            industry collaborations to my current work at ECAL. Here are some highlights:
+          </p>
+
+          <!-- href = the project's page file ("#" = page not built yet).
+               Each row has a small preview image that appears on hover. -->
+          <ul class="project-list">
+            <li>
+              <a class="project-link" href="projects/unicos-branding.html">
+                UNICOS Branding - Framework
+                <img class="project-preview" src="assets/Photo/previews/UNICOS.webp" alt="">
+              </a>
+            </li>
+            <li>
+              <a class="project-link" href="projects/bisses-du-valais.html">
+                Bisses du Valais - Website design
+                <img class="project-preview" src="assets/Photo/previews/Bisses.webp" alt="">
+              </a>
+            </li>
+            <li>
+              <a class="project-link" href="projects/ecal-semester-projects.html">
+                Semester Projects - ECAL
+                <img class="project-preview" src="assets/Photo/previews/mindset.webp" alt="">
+              </a>
+            </li>
+            <li>
+              <a class="project-link" href="projects/randox-certifly.html">
+                Randox | Certifly - mobile app
+                <img class="project-preview" src="assets/Photo/previews/Randox.webp" alt="">
+              </a>
+            </li>
+            <li>
+              <a class="project-link" href="projects/ecaredocta.html">
+                eCareDocta - mobile app
+                <img class="project-preview" src="assets/Photo/previews/eCare.webp" alt="">
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- A project's page is loaded in here when it's clicked -->
+        <div class="column-page"></div>
+      </div>
+    </section>
+
+    <section class="column" data-speed="1" data-name="tech">
+      <div class="column-inner">
+        <div class="column-summary">
+          <h2 class="column-title">Technology</h2>
+          <p class="column-text column-text--mono">
+            With a foundation in computer science and experience building digital
+            systems, I enjoy transforming abstract ideas into working interfaces that
+            are functional, thoughtful, and grounded in real use.
+          </p>
+        </div>
+
+        <!-- Projects, shown when this column is clicked (opens from the center) -->
+        <div class="column-projects">
+          <h2 class="column-title">Technology</h2>
+          <p class="projects-intro">
+            Over the years, I’ve worked on a variety of projects that showcase my
+            creativity and a passion for building meaningful design, ranging from
+            industry collaborations to my current work at ECAL. Here are some highlights:
+          </p>
+
+          <ul class="project-list">
+            <li><a class="project-link" href="#">UNICOS Framework - Implementation</a></li>
+            <li><a class="project-link" href="#">Logitech - PWS Keyboard layout</a></li>
+            <li><a class="project-link" href="#">Re-structure Workshop - ECAL</a></li>
+          </ul>
+        </div>
+
+        <!-- A project's page is loaded in here when it's clicked -->
+        <div class="column-page"></div>
+      </div>
+    </section>
+
+    <section class="column" data-speed="1.4" data-name="ux">
+      <div class="column-inner">
+        <div class="column-summary">
+          <h2 class="column-title">UX Design</h2>
+          <p class="column-text">
+            User experience is a backbone of any digital product and I pay close attention
+            to it when I am designing or implementing digital products. Through observation,
+            questioning, testing, and reflection, I explore the relationship between people,
+            technology, and culture. It allows me to move beyond assumptions and design with
+            curiosity, context, and intention.
+          </p>
+        </div>
+
+        <!-- Projects, shown when this column is clicked -->
+        <div class="column-projects">
+          <h2 class="column-title">Experience Design</h2>
+          <p class="projects-intro">
+            Research gives my work direction. Through observation, questioning, testing,
+            and reflection, I explore the relationship between people, technology, and
+            culture. It allows me to move beyond assumptions and design with curiosity,
+            context, and intention.
+          </p>
+
+          <ul class="project-list">
+            <li>
+              <a class="project-link" href="projects/lost-and-found.html">
+                Lost &amp; Found - ECAL
+                <img class="project-preview" src="assets/Photo/previews/lost-and-found.webp" alt="">
+              </a>
+            </li>
+            <li>
+              <a class="project-link" href="projects/reality-check.html">
+                Reality check - ECAL
+                <img class="project-preview" src="assets/Photo/previews/reality-check.webp" alt="">
+              </a>
+            </li>
+            <li>
+              <a class="project-link" href="projects/ux-bootcamp.html">
+                Experience Design Workshops - ECAL
+                <img class="project-preview" src="assets/Photo/previews/ux-bootcamp.webp" alt="">
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- A project's page is loaded in here when it's clicked -->
+        <div class="column-page"></div>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!-- Semester Projects - ECAL (two projects on one page)
+     Loaded into the UI Design column when the project is clicked (see main.js).
+     Images and videos: assets/Photo/project Images/UI Design/ECAL/web/
+     Every video sits in a video-wrap; main.js adds its sound button. -->
+
+<article class="project-page">
+
+  <!-- Back to the project list -->
+  <button class="page-back" type="button">
+    <span class="page-back-arrow">←</span> Design projects
+  </button>
+
+  <!-- ========== Project 1 ========== -->
+  <h1 class="page-title">1- Modular Mindset - Animation for music label</h1>
+  <p class="page-intro">
+    As part of a semester workshop, I was tasked with creating a modular, animated visual
+    identity for a fictional music label, exploring the intersection of motion design and
+    procedural systems. Using Cavalry, I developed dynamic visual systems that evolve according
+    to a set of precise rules while maintaining graphic coherence and a strong connection to
+    the label’s sonic universe. The objective was to create a flexible identity capable of
+    adapting seamlessly across digital interfaces and scales, from smartphone screens to
+    large-format billboards.
+  </p>
+
+  <!-- Two square videos side by side -->
+  <div class="page-split page-split--tight page-media-top">
+    <div class="video-wrap">
+      <video class="page-video" autoplay muted loop playsinline
+             poster="assets/Photo/project%20Images/UI%20Design/ECAL/web/particle-fever-poster.jpg"
+             src="assets/Photo/project%20Images/UI%20Design/ECAL/web/particle-fever.mp4"></video>
+    </div>
+    <div class="video-wrap">
+      <video class="page-video" autoplay muted loop playsinline
+             poster="assets/Photo/project%20Images/UI%20Design/ECAL/web/phone-hand-poster.jpg"
+             src="assets/Photo/project%20Images/UI%20Design/ECAL/web/phone-hand.mp4"></video>
+    </div>
+  </div>
+
+  <div class="video-wrap">
+    <video class="page-video" autoplay muted loop playsinline
+           poster="assets/Photo/project%20Images/UI%20Design/ECAL/web/phone-stand-poster.jpg"
+           src="assets/Photo/project%20Images/UI%20Design/ECAL/web/phone-stand.mp4"></video>
+  </div>
+
+  <!-- ========== Project 2 ========== -->
+  <h1 class="page-title">2- Beyond Clicks - The mind reader Interface</h1>
+  <section class="page-section">
+    <p>
+      For this project, we were tasked with creating an interactive interface through the lens
+      of Intent-Based Interaction, employing Environmental Awareness to detect a situation or
+      Intent Focus to track visual attention. The interaction model followed a three-phase workflow:
+    </p>
+    <ul class="page-bullets">
+      <li>Detection of an implicit trigger</li>
+      <li>Affordance where the UI reconfigures to match the tool</li>
+      <li>Progression to predict the next logical step.</li>
+    </ul>
+  </section>
+
+  <!-- Same height, uncropped. --ratio = each image's width / height in pixels -->
+  <div class="same-height">
+    <img style="--ratio: calc(1800 / 1350)" src="assets/Photo/project%20Images/UI%20Design/ECAL/web/notification-shirt.webp" alt="Phone in a shirt pocket showing a Read the Room notification">
+    <img style="--ratio: calc(1100 / 1390)" src="assets/Photo/project%20Images/UI%20Design/ECAL/web/notification-jeans.webp" alt="Phone in a jeans pocket showing a Read the Room notification">
+  </div>
+
+  <h2 class="page-heading page-heading--tight">Question I asked myself:</h2>
+  <p class="page-question">
+    What happens when we create technology to solve the social problems we are too polite
+    to address ourselves?
+  </p>
+
+  <h2 class="page-heading page-heading--tight">Concept:</h2>
+  <p>
+    A conversation assistant that detects imbalance in social interactions and gently guides
+    people toward more balanced conversations, without taking control away from them.
+  </p>
+  <p class="page-paragraph-gap">
+    The focus is on three kind of people in a group scenario:<br>
+    1- One who talks a lot.<br>
+    2- One who does not participate in the conversation.<br>
+    3- One who who is a balanced communicator.
+  </p>
+
+  <!-- The three app screens; the middle one sits a little higher -->
+  <div class="screens">
+    <img src="assets/Photo/project%20Images/UI%20Design/ECAL/web/screen-red.webp" alt="App screen for someone who talks a lot">
+    <img src="assets/Photo/project%20Images/UI%20Design/ECAL/web/screen-green.webp" alt="App screen for a balanced communicator">
+    <img src="assets/Photo/project%20Images/UI%20Design/ECAL/web/screen-blue.webp" alt="App screen for someone who doesn't participate">
+  </div>
+
+  <h2 class="page-heading page-heading--tight">How it works?</h2>
+  <div class="page-three">
+    <div>
+      <h3 class="page-label">Detection:</h3>
+      <p>Speaking imbalance in the room is detected automatically from audio, without explicit user input.</p>
+    </div>
+    <div>
+      <h3 class="page-label">Affordance:</h3>
+      <p>The phone UI reconfigures by cue type vibration only, then full notification with sound.</p>
+    </div>
+    <div>
+      <h3 class="page-label">Progression:</h3>
+      <p>Cues escalate in a fixed sequence (early nudge → stronger notification)</p>
+    </div>
+  </div>
+
+  <div class="video-wrap">
+    <video class="page-video" autoplay muted loop playsinline
+           poster="assets/Photo/project%20Images/UI%20Design/ECAL/web/read-the-room-poster.jpg"
+           src="assets/Photo/project%20Images/UI%20Design/ECAL/web/read-the-room.mp4"></video>
+  </div>
+
+</article>

@@ -1,0 +1,335 @@
+/* Home page */
+
+/* ---------- Top bar ---------- */
+.top-bar {
+  height: var(--top-bar-height);
+  padding: 0 var(--side-padding);
+  background: var(--blue);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;   /* push "Download CV" to the right */
+}
+
+.cv-link {
+  color: var(--white);
+  font-size: var(--size-small);
+}
+
+.cv-link:hover {
+  text-decoration: underline;
+}
+
+/* ---------- Greeting strip ---------- */
+/* Shows either the short line or the full intro. The height change between
+   the two is animated in main.js; CSS only swaps the text and fades it in. */
+.greeting {
+  padding: 0 var(--side-padding);
+  background: var(--beige);
+  font-size: var(--size-greeting);
+  overflow: hidden;            /* hide content while the strip is resizing */
+}
+
+.greeting-short {
+  line-height: var(--greeting-height);   /* one line, vertically centered */
+  animation: fade-in 0.4s ease both;
+}
+
+/* "Amna": looks like bold text, turns blue on hover to show it's clickable */
+.name-button {
+  font: inherit;
+  font-weight: 600;
+  color: inherit;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.name-button:hover,
+.name-button:focus-visible {
+  color: var(--blue);
+}
+
+/* "← Go back": hidden on the home view */
+.back-button {
+  display: none;
+  font: inherit;
+  line-height: var(--greeting-height);
+  color: inherit;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.back-button:hover,
+.back-button:focus-visible {
+  color: var(--blue);
+}
+
+/* While a column is open (class added by main.js): swap greeting for "Go back" */
+.greeting.shows-back .greeting-short {
+  display: none;
+}
+
+.greeting.shows-back .back-button {
+  display: block;
+  animation: fade-in 0.4s ease both;
+}
+
+/* Full intro: hidden until the strip is open */
+.intro {
+  display: none;
+  padding: 28px 0;
+  line-height: 1.15;
+}
+
+.intro-link {
+  color: var(--blue);
+  font-weight: 600;
+}
+
+.intro-link:hover {
+  text-decoration: underline;
+}
+
+/* Open state (class added by main.js). The whole strip is clickable to close. */
+.greeting.is-open {
+  cursor: pointer;
+}
+
+.greeting.is-open .greeting-short {
+  display: none;
+}
+
+.greeting.is-open .intro {
+  display: block;
+  animation: fade-in 0.4s ease 0.2s both;   /* fade in as the strip opens */
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ---------- Three columns ---------- */
+.columns {
+  flex: 1;                     /* fill whatever height is left below the bars */
+  min-height: 0;               /* let it shrink when the intro opens */
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  transition: grid-template-columns var(--expand-time) var(--ease);
+}
+
+/* One column open: it takes 4 parts of the width, the others 1 part each */
+.columns[data-expanded="ui"]   { grid-template-columns: 4fr 1fr 1fr; }
+.columns[data-expanded="tech"] { grid-template-columns: 1fr 4fr 1fr; }
+.columns[data-expanded="ux"]   { grid-template-columns: 1fr 1fr 4fr; }
+
+/* A project page is open: that column widens further to 8 parts */
+.columns[data-expanded="ui"][data-view="page"]   { grid-template-columns: 8fr 1fr 1fr; }
+.columns[data-expanded="tech"][data-view="page"] { grid-template-columns: 1fr 8fr 1fr; }
+.columns[data-expanded="ux"][data-view="page"]   { grid-template-columns: 1fr 1fr 8fr; }
+
+.column {
+  overflow: hidden;            /* content moves inside; main.js slides it */
+}
+
+/* Columns with projects can be clicked to open;
+   when one is open, the narrow ones can be clicked to go back */
+.column:has(.column-projects),
+.columns[data-expanded] .column:not(.is-expanded) {
+  cursor: pointer;
+}
+
+/* The part that actually moves when scrolling.
+   Summary, projects and project page sit on top of each other in the same spot. */
+.column-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);   /* always exactly the column's width */
+  padding: 30px var(--side-padding) 60px;
+  will-change: transform;      /* hint the browser to keep movement smooth */
+  transition: padding var(--expand-time) var(--ease);
+}
+
+.column-summary,
+.column-projects,
+.column-page {
+  grid-area: 1 / 1;
+}
+
+/* Divider lines between columns */
+.column + .column {
+  border-left: var(--divider);
+}
+
+.column-title {
+  font-size: var(--size-title);
+  font-weight: 400;
+  color: var(--blue);
+  margin-bottom: 0.7em;
+  transition: font-size var(--expand-time) var(--ease);
+}
+
+.column-text {
+  font-size: var(--size-body);
+  line-height: 1.24;
+  transition:
+    font-size var(--expand-time) var(--ease),
+    color 0.3s ease;
+}
+
+/* Technology column uses the mono font with wider spacing */
+.column-text--mono {
+  font-family: var(--font-mono);
+  font-size: var(--size-mono);
+  line-height: 1.55;
+  letter-spacing: 0.08em;
+}
+
+/* Hover: text in the hovered column turns blue (not in the open column) */
+.column:not(.is-expanded):hover .column-text {
+  color: var(--blue);
+}
+
+/* ---------- Narrow columns (while another column is open) ---------- */
+/* Text shrinks smoothly thanks to the font-size transitions above */
+.columns[data-expanded] .column:not(.is-expanded) .column-inner {
+  padding: 30px 25px 60px;
+}
+
+.columns[data-expanded] .column:not(.is-expanded) .column-title {
+  font-size: var(--size-title-small);
+}
+
+.columns[data-expanded] .column:not(.is-expanded) .column-text {
+  font-size: var(--size-body-small);
+}
+
+.columns[data-expanded] .column:not(.is-expanded) .column-text--mono {
+  font-size: var(--size-mono-small);
+}
+
+/* While a project page is open, the narrow columns get even smaller */
+.columns[data-view="page"] .column:not(.is-expanded) .column-inner {
+  padding: 30px 16px 60px;
+}
+
+.columns[data-view="page"] .column:not(.is-expanded) .column-title {
+  font-size: var(--size-title-tiny);
+}
+
+.columns[data-view="page"] .column:not(.is-expanded) .column-text {
+  font-size: var(--size-body-tiny);
+}
+
+.columns[data-view="page"] .column:not(.is-expanded) .column-text--mono {
+  font-size: var(--size-mono-tiny);
+}
+
+/* ---------- Open column: summary out, projects in ---------- */
+.column-summary {
+  transition: opacity 0.3s ease 0.4s;   /* closing: fade back in once narrowing */
+}
+
+.column.is-expanded .column-summary {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;       /* opening: fade out right away */
+}
+
+/* Projects are hidden until their column opens */
+.column-projects {
+  display: none;
+  /* Laid out at the final open width from the start, so the text
+     doesn't jump between lines while the column is widening */
+  width: calc(100vw * 4 / 6 - 2 * var(--side-padding));
+}
+
+.column.is-expanded .column-projects {
+  display: block;
+  animation: projects-in 0.7s ease-out 0.3s both;
+}
+
+@keyframes projects-in {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Technology opens from the center instead:
+   its projects stay centered on screen while the column grows outward,
+   and are revealed from the middle to both sides like opening curtains. */
+.column[data-name="tech"] .column-projects {
+  justify-self: unsafe center;   /* "unsafe" = keep centered even while wider than the column */
+}
+
+.column[data-name="tech"].is-expanded .column-projects {
+  animation: projects-from-center var(--expand-time) var(--ease) 0.1s both;
+}
+
+@keyframes projects-from-center {
+  from { opacity: 0; clip-path: inset(0 50%); }
+  to   { opacity: 1; clip-path: inset(0 0); }
+}
+
+.projects-intro {
+  font-size: var(--size-projects);
+  line-height: 1.18;
+  margin-bottom: 1.5em;
+}
+
+/* Project list: arrow + name, line under each row */
+.project-list {
+  list-style: none;
+}
+
+.project-link {
+  position: relative;          /* so the preview image is placed inside the row */
+  display: flex;
+  align-items: center;
+  gap: 0.4em;
+  padding: 0.55em 0;
+  font-size: var(--size-projects);
+  border-bottom: var(--divider);
+  transition: color 0.3s ease;
+}
+
+/* Blue "→" arrow in Work Sans before each project name */
+.project-link::before {
+  content: "→";
+  color: var(--blue);
+  transition: transform 0.3s ease;
+}
+
+/* Hover: name turns blue and the arrow nudges right */
+.project-link:hover {
+  color: var(--blue);
+}
+
+.project-link:hover::before {
+  transform: translateX(6px);
+}
+
+/* Project preview image: sits at the right end of the row, hidden until hover */
+.project-preview {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  width: clamp(150px, 11vw, 220px);
+  aspect-ratio: 3 / 2;         /* every preview gets the same size... */
+  object-fit: cover;           /* ...the image fills it and is trimmed, never stretched */
+  opacity: 0;
+  transform: translateY(-50%) scale(0.85);
+  pointer-events: none;        /* never blocks clicking the row */
+  transition:
+    opacity 0.35s ease,
+    transform 0.5s var(--ease);
+}
+
+/* Hover: fade in and grow to full size */
+.project-link:hover .project-preview {
+  opacity: 1;
+  transform: translateY(-50%) scale(1);
+}
+
+/* ---------- Mobile (to be added once the mobile design is ready) ---------- */

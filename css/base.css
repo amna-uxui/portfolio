@@ -1,0 +1,31 @@
+/* Reset and global styles */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* The page itself never scrolls; only the columns do (see main.js) */
+html,
+body {
+  height: 100%;
+  overflow: hidden;
+}
+
+/* Stack top bar, greeting and columns; columns take the remaining height */
+body {
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-main);
+  color: var(--black);
+  background: var(--white);
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
