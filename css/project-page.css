@@ -486,7 +486,17 @@
 /* Larger intro under the first title (ECAL admission workshop) */
 .project-page .page-intro--large {
   font-size: var(--size-page-subheading);
-  margin-bottom: var(--space-block);
+  margin-bottom: calc(var(--space-block) / 2);   /* 32px */
+}
+
+/* Back button with a set 24px gap above the page title */
+.page-back--spaced {
+  margin-bottom: 24px;
+}
+
+/* Section with half the usual space below it (Roles and Responsibilities) */
+.page-section--half {
+  margin-bottom: calc(var(--space-block) / 2);   /* 32px */
 }
 
 .page-intro--large strong {
