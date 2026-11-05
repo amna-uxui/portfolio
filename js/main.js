@@ -228,11 +228,20 @@ document.addEventListener("click", (event) => {
   } else if (backToList) {
     closeProject();
   } else if (gotoLink) {
-    // Link to another column, e.g. data-goto="tech"
+    // Link to another column, e.g. data-goto="tech", optionally straight to one
+    // of its pages, e.g. data-page="projects/unicos-framework.html"
     event.preventDefault();
-    document.querySelector(`.column[data-name="${gotoLink.dataset.goto}"]`).click();
+    goToColumn(gotoLink.dataset.goto, gotoLink.dataset.page);
   }
 });
+
+// Close the open column, open another one and, if given, load one of its pages
+async function goToColumn(name, pageUrl) {
+  const col = columns.find((c) => c.box.dataset.name === name);
+  await closeColumn({ goingHome: false });
+  openColumn(col);
+  if (pageUrl) await openProject(pageUrl);
+}
 
 async function openProject(url) {
   const openBox = document.querySelector(".column.is-expanded");

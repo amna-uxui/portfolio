@@ -17,7 +17,7 @@
     application which will run in commercial off-the-shelf products (e.g. SCADA and PLCs).
   </p>
 
-  <img class="page-hero" src="assets/Photo/project%20Images/UI%20Design/UNICOS/web/header.webp" alt="The LHC tunnel at CERN">
+  <img class="page-hero" src="assets/Photo/project%20Images/UI%20Design/UNICOS/web/hero.jpg" alt="The LHC tunnel at CERN">
 
   <!-- Problem statement | Solution -->
   <section class="page-split">
@@ -123,11 +123,35 @@
 
   </section>
 
+  <!-- Screen recording of the old HMI (no sound, so no sound button) -->
+  <section>
+    <h2 class="page-heading">Take a look at the old UNICOS HMI:</h2>
+    <video class="page-video" autoplay muted loop playsinline
+           poster="assets/Photo/project%20Images/UI%20Design/UNICOS/web/old-hmi-poster.jpg"
+           src="assets/Photo/project%20Images/UI%20Design/UNICOS/web/old-hmi.mp4"></video>
+  </section>
+
   <!-- Research questions -->
   <div class="page-questions">
     <p>→ How can we design a system that not only solve the current issues but is also helpful in future?</p>
     <p>→ How can we redesign this framework without changing existing layout?</p>
   </div>
+
+  <!-- Project scope: branding (this page) inside development (Technology page)
+       inside the whole rebranding; the highlighted circle is this page's part -->
+  <svg class="scope-circles" viewBox="0 0 600 616" role="img"
+       aria-label="Branding and Re-design, inside Development, Testing and Deployment, inside UNICOS Rebranding">
+    <circle cx="300" cy="308" r="296"/>
+    <circle cx="300" cy="230" r="218"/>
+    <circle class="is-highlighted" cx="300" cy="151" r="139"/>
+    <circle class="dot" cx="300" cy="12" r="10"/>
+    <text x="300" y="183">Branding and</text>
+    <text x="300" y="221">Re-design</text>
+    <text x="300" y="337">Development, Testing</text>
+    <text x="300" y="375">&amp; Deployment</text>
+    <text x="300" y="514">UNICOS</text>
+    <text x="300" y="552">Rebranding</text>
+  </svg>
 
   <hr class="page-divider">
 
@@ -146,7 +170,7 @@
 
   <!-- Mockups: before (left) and after (right) -->
   <section>
-    <h2 class="page-heading">Mockups: Before vs After</h2>
+    <h2 class="page-heading">Mockups:</h2>
     <div class="page-split">
       <img src="assets/Photo/project%20Images/UI%20Design/UNICOS/web/before-1.webp" alt="Import devices panel, before">
       <img src="assets/Photo/project%20Images/UI%20Design/UNICOS/web/after-1.webp" alt="Import devices panel, after">
@@ -174,8 +198,8 @@
     </div>
   </section>
 
-  <!-- Opens the Technology column (its implementation page comes later) -->
-  <a class="page-link" href="#" data-goto="tech">
+  <!-- Opens the Technology column straight on the implementation page -->
+  <a class="page-link" href="#" data-goto="tech" data-page="projects/unicos-framework.html">
     → Click here to see how I implemented these mockups in WinCC OA using control script and QT CSS.
   </a>
 

@@ -1,0 +1,155 @@
+<!-- UNICOS Framework - Implementation
+     Loaded into the Technology column when the project is clicked (see main.js).
+     Images and video: assets/Photo/project Images/Technology/CERN/web/ -->
+
+<article class="project-page">
+
+  <!-- Back to the project list -->
+  <button class="page-back" type="button">
+    <span class="page-back-arrow">←</span> Tech Project
+  </button>
+
+  <h1 class="page-title">UNICOS Framework Implementation</h1>
+  <p class="page-intro">
+    UNICOS was born at CERN in early 2001 with the development of the LHC cryogenics
+    control system. It deals with the two upper layers of a classical control system:
+    Supervision and Control. UNICOS proposes a method to design and develop the control
+    application which will run in commercial off-the-shelf products (e.g. SCADA and PLCs).
+  </p>
+
+  <img class="page-hero" src="assets/Photo/project%20Images/Technology/CERN/web/hero.jpg" alt="An engineer inside the CMS detector at CERN">
+
+  <!-- Project scope: this page covers development, testing and deployment,
+       which includes the branding (both highlighted) -->
+  <svg class="scope-circles scope-circles--mono" viewBox="0 0 600 616" role="img"
+       aria-label="Branding and Re-design, inside Development, Testing and Deployment, inside UNICOS Rebranding">
+    <circle cx="300" cy="308" r="296"/>
+    <circle class="is-highlighted" cx="300" cy="230" r="218"/>
+    <circle class="is-highlighted" cx="300" cy="151" r="139"/>
+    <circle class="dot" cx="300" cy="12" r="10"/>
+    <text x="300" y="186">Branding</text>
+    <text x="300" y="227">Re-design</text>
+    <text x="300" y="324">Development</text>
+    <text x="300" y="364">Testing</text>
+    <text x="300" y="406">Deployment</text>
+    <text x="300" y="517">UNICOS</text>
+    <text x="300" y="559">Rebranding</text>
+  </svg>
+
+  <!-- Opens the UI Design column straight on the branding page -->
+  <div class="page-section">
+    <a class="page-link" href="#" data-goto="ui" data-page="projects/unicos-branding.html">
+      → Click here to see how the branding process for these panels.
+    </a>
+  </div>
+
+  <!-- Screen recording of the new HMI (no sound, so no sound button) -->
+  <section class="page-section">
+    <h2 class="page-heading">A glimpse at the new UNICOS HMI:</h2>
+    <video class="page-video" autoplay muted loop playsinline
+           poster="assets/Photo/project%20Images/Technology/CERN/web/new-hmi-poster.jpg"
+           src="assets/Photo/project%20Images/Technology/CERN/web/new-hmi.mp4"></video>
+  </section>
+
+  <!-- ========== Redesigning one panel, step by step ========== -->
+  <h2 class="page-heading page-heading--tight">Let's go through the process of redesigning one panel</h2>
+
+  <h3 class="page-step">Step:1 Analyzing old panel</h3>
+  <p class="page-section">
+    The first step in the redesign process is to align panels with the UNICOS’s updated
+    branding guidelines. This involves incorporating consistent visual elements such as
+    colors, fonts, and icons, ensuring that the panel not only functions well but also
+    reinforces the brand's identity.
+  </p>
+  <!-- Same height, uncropped. --ratio = each image's width / height in pixels -->
+  <div class="same-height">
+    <img style="--ratio: calc(680 / 617)" src="assets/Photo/project%20Images/Technology/CERN/web/analyze-1.png" alt="Old Application Diagnostic panel with no application selected">
+    <img style="--ratio: calc(690 / 617)" src="assets/Photo/project%20Images/Technology/CERN/web/analyze-2.png" alt="Old Application Diagnostic panel showing an application's alarm summary">
+  </div>
+
+  <h3 class="page-step">Step:2 Redesigning Panels using brand guidelines</h3>
+  <p class="page-section">
+    The first step in the redesign process is to align panels with the UNICOS’s updated
+    branding guidelines. This involves incorporating consistent visual elements such as
+    colors, fonts, and icons, ensuring that the panel not only functions well but also
+    reinforces the brand's identity.
+  </p>
+  <div class="same-height">
+    <img style="--ratio: calc(680 / 564)" src="assets/Photo/project%20Images/Technology/CERN/web/redesign-1.png" alt="Redesigned Application Diagnostic panel in the WinCC OA editor">
+    <img style="--ratio: calc(584 / 564)" src="assets/Photo/project%20Images/Technology/CERN/web/redesign-2.png" alt="Redesigned application detail panel in the WinCC OA editor">
+  </div>
+
+  <h3 class="page-step">Step:2 Incorporating styling in WinCC OA using Control Script</h3>
+  <p class="page-section">
+    Since WINCC OA is not a design tool hence, to overcome the limitations of WINCC OA and
+    to implement the necessary visual enhancements, <strong>QT CSS,</strong> a style sheet
+    language tailored for QT applications was used.
+  </p>
+  <img class="page-wide-image" src="assets/Photo/project%20Images/Technology/CERN/web/control-script.png" alt="Control script for the Application Operation panel in the WinCC OA script editor">
+
+  <h3 class="page-step">Step:2 Incorporating new functionality in Wincc OA using Qt CSS</h3>
+  <p class="page-section">
+    Since WINCC OA is not a design tool hence, to overcome the limitations of WINCC OA and
+    to implement the necessary visual enhancements, <strong>QT CSS,</strong> a style sheet
+    language tailored for QT applications was used.
+  </p>
+  <img class="page-wide-image" src="assets/Photo/project%20Images/Technology/CERN/web/qt-css.png" alt="Qt CSS stylesheet for UNICOS tables open in a text editor">
+
+  <p class="page-big-question">
+    Repeated this same process for over 300 panels.<br>
+    Analysis → Design → Development
+  </p>
+
+  <!-- ========== Testing and deployment ========== -->
+  <section class="page-section">
+    <h2 class="page-heading page-heading--tight">Testing and Deployment - 2 months long campaign</h2>
+    <p>
+      My role primarily involves addressing JIRA issues—typically minor bugs that were
+      overlooked or overwritten during the redesign—and implementing UI enhancements based on
+      the recommended changes, as illustrated in following screenshots.
+    </p>
+    <p class="page-paragraph-gap">Problems reported are both:</p>
+    <p class="page-paragraph-gap">
+      i- Technical - Functionality oriented<br>
+      ii- Design Oriented
+    </p>
+  </section>
+
+  <div class="same-height">
+    <img style="--ratio: calc(757 / 356)" src="assets/Photo/project%20Images/Technology/CERN/web/jira-issues.png" alt="JIRA board of reported issues with screenshots and comments">
+    <img style="--ratio: calc(610 / 356)" src="assets/Photo/project%20Images/Technology/CERN/web/testing.png" alt="Testing a trend configuration panel next to the log viewer">
+  </div>
+
+  <!-- ========== Dark mode ========== -->
+  <section class="page-section">
+    <h2 class="page-heading page-heading--tight">Additional functionality - Dark mode of UNICOS:</h2>
+    <p>
+      I also implementing <strong>dark mode</strong> for UNICOS, allowing users to seamlessly
+      switch between light and dark modes via the HMI. This process includes designing a
+      color database, theme specific icons, and optimizing the code for a smooth user
+      experience.
+    </p>
+  </section>
+
+  <div class="same-height">
+    <img style="--ratio: calc(696 / 468)" src="assets/Photo/project%20Images/Technology/CERN/web/dark-mode-1.png" alt="Application Configuration panel in dark mode">
+    <img style="--ratio: calc(673 / 469)" src="assets/Photo/project%20Images/Technology/CERN/web/dark-mode-2.png" alt="Device DPE Configuration panel in dark mode">
+  </div>
+
+  <!-- ========== Outcome ========== -->
+  <h2 class="page-heading">Outcome all the way from CERN control Room:</h2>
+
+  <div class="same-height">
+    <img style="--ratio: calc(672 / 504)" src="assets/Photo/project%20Images/Technology/CERN/web/control-room-1.jpg" alt="CERN cryogenics control room with the UNICOS HMI on its screens">
+    <img style="--ratio: calc(672 / 504)" src="assets/Photo/project%20Images/Technology/CERN/web/control-room-2.jpg" alt="CERN control room with rows of screens running the new HMI">
+  </div>
+
+  <ul class="page-bullets">
+    <li>A robust UNICOS HMI to support CERN for the next 20 years.</li>
+    <li>Comprehensive design guideline document for future development.</li>
+    <li>Better user experience and ease of use.</li>
+    <li>Enhanced UI design for the open-source release, with all development carried out at CERN.</li>
+    <li>Dark mode, making it more comfortable to monitor or work for longer periods</li>
+  </ul>
+
+</article>

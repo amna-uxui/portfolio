@@ -611,6 +611,51 @@
   margin-right: auto;
 }
 
+/* ---------- Pieces used on the two UNICOS pages ---------- */
+/* Project scope: three circles touching at the top, drawn at the design's size
+   (600 wide = 593 of 1400px) and scaled to the column. Highlighted circles are beige. */
+.scope-circles {
+  display: block;
+  width: 42.86%;
+  height: auto;
+  margin: 0 auto var(--space-block);
+}
+
+.scope-circles circle {
+  fill: none;
+  stroke: var(--blue);
+  stroke-width: 2;
+}
+
+.scope-circles .is-highlighted {
+  fill: var(--beige);
+}
+
+.scope-circles .dot {
+  fill: var(--blue);
+  stroke: none;
+}
+
+.scope-circles text {
+  fill: var(--blue);
+  font-size: 32px;               /* SVG units, so it scales with the circles */
+  text-anchor: middle;
+  dominant-baseline: central;
+}
+
+/* Technology page: labels in Space Mono */
+.scope-circles--mono text {
+  font-family: var(--font-mono);
+  font-size: 30px;
+}
+
+/* "Step:1 Analyzing old panel": bold black step titles */
+.page-step {
+  font-size: var(--size-page-subheading);
+  font-weight: 600;
+  margin-bottom: 32px;
+}
+
 /* ---------- Pieces used on the Randox page ---------- */
 /* Wider version of the centred image (e.g. the three phones at the top) */
 .page-centered-image--wide {
