@@ -621,6 +621,37 @@
   font-size: clamp(32px, 3vw, 56px);
 }
 
+/* ---------- Pieces used on the Transversal Workshop page ---------- */
+/* Three rugs side by side, edge to edge like the design */
+.rug-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: 32px 0;
+}
+
+.rug-row img {
+  width: 100%;
+}
+
+/* Notes, sketches and photos placed like the design. Each image's left and width
+   are % of the 1400px-wide area and its top is % of the 977px height (set inline) */
+.collage {
+  position: relative;
+  aspect-ratio: 1400 / 977;
+  margin-bottom: var(--space-block);
+}
+
+.collage img {
+  position: absolute;
+}
+
+/* Portrait (phone) video, centred, about as tall as the design's image */
+.video-wrap--portrait {
+  width: 30%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 /* ---------- Pieces used on the Randox page ---------- */
 /* Wider version of the centred image (e.g. the three phones at the top) */
 .page-centered-image--wide {
