@@ -482,7 +482,7 @@
   color: var(--blue);
 }
 
-/* ---------- Pieces used on the ED Workshops page ---------- */
+/* ---------- Pieces used on the Participatory Design Workshop page ---------- */
 /* Larger intro under the first title (ECAL admission workshop) */
 .project-page .page-intro--large {
   font-size: var(--size-page-subheading);
@@ -578,47 +578,6 @@
 .insights-map .line--blue,
 .insights-map .arrow--blue path {
   stroke: var(--blue);
-}
-
-/* The four brief steps: picture on top, name and description below */
-.brief-steps {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 3%;
-  margin-top: var(--space-block);
-}
-
-.brief-steps img {
-  width: 100%;
-  aspect-ratio: 4 / 3;
-  object-fit: contain;           /* whole picture visible, all boxes the same size */
-}
-
-.brief-steps figcaption {
-  margin-top: 24px;
-}
-
-.brief-steps strong {
-  display: block;
-  font-weight: 500;
-  margin-bottom: 0.8em;
-}
-
-/* Mascot evolution: three pictures with arrows between them */
-.mascot-steps {
-  display: flex;
-  align-items: center;
-  gap: 2%;
-  margin: var(--space-block) 0;
-}
-
-.mascot-steps img {
-  flex: 1;
-  min-width: 0;
-}
-
-.mascot-arrow {
-  font-size: clamp(32px, 3vw, 56px);
 }
 
 /* ---------- Pieces used on the Transversal Workshop page ---------- */
