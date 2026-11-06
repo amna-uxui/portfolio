@@ -14,10 +14,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Work+Sans&text=%E2%86%90%E2%86%92%E2%86%91%E2%86%93&display=swap" rel="stylesheet">
 
   <!-- "?v=…": bump a file's number after editing it, so browsers fetch the new copy -->
-  <link rel="stylesheet" href="css/variables.css?v=3">
+  <link rel="stylesheet" href="css/variables.css?v=4">
   <link rel="stylesheet" href="css/base.css?v=2">
-  <link rel="stylesheet" href="css/home.css?v=5">
-  <link rel="stylesheet" href="css/project-page.css?v=12">
+  <link rel="stylesheet" href="css/home.css?v=15">
+  <link rel="stylesheet" href="css/project-page.css?v=13">
 </head>
 <body>
 
@@ -72,8 +72,11 @@
           </p>
         </div>
 
-        <!-- Projects, shown when this column is clicked -->
-        <div class="column-projects">
+        <!-- Projects, shown when this column is clicked.
+             data-reel: square photos for the phone slideshow (assets/Photo/reel/) -->
+        <div class="column-projects"
+             data-reel="ui-unicos-tunnel.jpg ui-bisses-path.jpg ui-particle-fever.jpg ui-rug-leaves.jpg
+                        ui-rug-drawing.jpg ui-decoding.jpg ui-mosaic.jpg ui-rug-smiley.jpg">
           <h2 class="column-title">Design projects</h2>
           <p class="projects-intro">
             Over the years, I’ve worked on a variety of projects that showcase my
@@ -87,31 +90,31 @@
             <li>
               <a class="project-link" href="projects/unicos-branding.html">
                 UNICOS Branding - Framework
-                <img class="project-preview" src="assets/Photo/previews/UNICOS.webp" alt="">
+                <img class="project-preview" src="assets/Photo/previews/unicos-branding.jpg" alt="">
               </a>
             </li>
             <li>
               <a class="project-link" href="projects/ecal-semester-projects.html">
                 Transversal Workshops
-                <img class="project-preview" src="assets/Photo/previews/mindset.webp" alt="">
+                <img class="project-preview" src="assets/Photo/previews/transversal.jpg" alt="">
               </a>
             </li>
             <li>
               <a class="project-link" href="projects/bisses-du-valais.html">
                 Bisses du Valais - Website design
-                <img class="project-preview" src="assets/Photo/previews/Bisses.webp" alt="">
+                <img class="project-preview" src="assets/Photo/previews/bisses.jpg" alt="">
               </a>
             </li>
             <li>
               <a class="project-link" href="projects/randox-certifly.html">
                 Randox | Certifly - mobile app
-                <img class="project-preview" src="assets/Photo/previews/Randox.webp" alt="">
+                <img class="project-preview" src="assets/Photo/previews/randox.jpg" alt="">
               </a>
             </li>
             <li>
               <a class="project-link" href="projects/ecaredocta.html">
                 eCareDocta - mobile app
-                <img class="project-preview" src="assets/Photo/previews/eCare.webp" alt="">
+                <img class="project-preview" src="assets/Photo/previews/ecaredocta.jpg" alt="">
               </a>
             </li>
           </ul>
@@ -135,7 +138,8 @@
         </div>
 
         <!-- Projects, shown when this column is clicked (opens from the center) -->
-        <div class="column-projects">
+        <div class="column-projects"
+             data-reel="tech-cms.jpg tech-control-room-1.jpg tech-keyboards.jpg tech-control-room-2.jpg">
           <h2 class="column-title">Technology</h2>
           <p class="projects-intro">
             Over the years, I’ve worked on a variety of projects that showcase my
@@ -177,7 +181,9 @@
         </div>
 
         <!-- Projects, shown when this column is clicked -->
-        <div class="column-projects">
+        <div class="column-projects"
+             data-reel="ux-workshop-1.jpg ux-lost-found-1.jpg ux-workshop-2.jpg ux-lost-found-2.jpg
+                        ux-interview.jpg ux-workshop-3.jpg ux-lost-found-3.jpg ux-lost-found-4.jpg">
           <h2 class="column-title">Experience Design</h2>
           <p class="projects-intro">
             Research gives my work direction. Through observation, questioning, testing,
@@ -190,13 +196,13 @@
             <li>
               <a class="project-link" href="projects/lost-and-found.html">
                 Lost &amp; Found - ECAL
-                <img class="project-preview" src="assets/Photo/previews/lost-and-found.webp" alt="">
+                <img class="project-preview" src="assets/Photo/previews/lost-and-found.jpg" alt="">
               </a>
             </li>
             <li>
               <a class="project-link" href="projects/reality-check.html">
                 Reality check - ECAL
-                <img class="project-preview" src="assets/Photo/previews/reality-check.webp" alt="">
+                <img class="project-preview" src="assets/Photo/previews/reality-check.jpg" alt="">
               </a>
             </li>
             <li>
@@ -215,6 +221,20 @@
 
   </main>
 
-  <script src="js/main.js?v=3"></script>
+  <!-- Phones only: shown instead of a case study, until the case studies have a
+       phone layout. Its slideshow of every project is filled in by main.js. -->
+  <section class="mobile-placeholder">
+    <p class="placeholder-text">
+      Hey, thanks for stopping by!<br>
+      I’m building this site with a lot of care, and I’m still working on making the
+      case studies work well on smaller screens.<br>
+      In the meantime, you can explore them on a
+      <button class="share-link" type="button"><span>laptop</span> or <span>desktop</span></button>.
+    </p>
+    <p class="share-note" role="status"></p>
+    <div class="project-reel" aria-hidden="true"></div>
+  </section>
+
+  <script src="js/main.js?v=9"></script>
 </body>
 </html>

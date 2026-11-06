@@ -8,6 +8,10 @@ const HOVER_SLOWDOWN = 0.4; // hovered column moves at 40% of its normal speed
 const OPEN_SPEED = 1.5;     // speed of an open column (project list or page)
 const GALLERY_SPEED = 2.5;  // sideways galleries move faster, their slides are wide
 
+// Phones get their own layout (the "Phones" part of home.css): sections stacked,
+// the page scrolling normally, and a placeholder page instead of case studies
+const phone = window.matchMedia("(max-width: 767px)");
+
 // Keep track of each column's position
 const columns = [...document.querySelectorAll(".column")].map((column) => ({
   box: column,
@@ -23,6 +27,7 @@ const galleries = new Map();
 window.addEventListener(
   "wheel",
   (event) => {
+    if (phone.matches) return; // phones scroll the page normally
     event.preventDefault(); // stop the browser's normal scroll
 
     // Over a sideways gallery: scroll it left/right instead, until it reaches its end
@@ -106,7 +111,10 @@ greeting.addEventListener("click", (event) => {
   if (event.target.closest("a")) return; // CERN / Logitech links just open
 
   if (event.target.closest(".back-button")) {
-    closeColumn(); // "← Go back" returns to the home view
+    // "← Go back" returns to the home view (on phones: leaves the placeholder page,
+    // like the phone's own back gesture)
+    if (document.body.classList.contains("shows-placeholder")) history.back();
+    else closeColumn();
     return;
   }
 
@@ -138,8 +146,12 @@ function setIntroOpen(open) {
 const columnsWrap = document.querySelector(".columns");
 
 columns.forEach((col) => {
-  col.box.addEventListener("click", async () => {
-    if (col.box.classList.contains("is-expanded")) return; // already open
+  col.box.addEventListener("click", async (event) => {
+    if (col.box.classList.contains("is-expanded")) {
+      // Phones: tapping an open section's title or text folds it again
+      if (phone.matches && event.target.closest(".column-summary")) closeColumn();
+      return;
+    }
 
     const hasProjects = col.box.querySelector(".column-projects") !== null;
 
@@ -147,6 +159,12 @@ columns.forEach((col) => {
     // column, we're not going home, so "← Go back" stays put.
     await closeColumn({ goingHome: !hasProjects });
     if (hasProjects) openColumn(col);
+
+    // Phones: if folding the section above moved this one off the top of the
+    // screen, bring it back into view
+    if (phone.matches && col.box.getBoundingClientRect().top < 0) {
+      col.box.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
   });
 });
 
@@ -172,11 +190,13 @@ async function closeColumn({ goingHome = true } = {}) {
     greeting.classList.remove("shows-back"); // "← Go back" becomes the greeting again
   }
 
-  const showing = openBox.classList.contains("shows-page")
+  const leavingPage = openBox.classList.contains("shows-page");
+  const showing = leavingPage
     ? openBox.querySelector(".column-page")
     : openBox.querySelector(".column-projects");
 
   await fadeOutThen(showing, () => {
+    if (leavingPage) markResizing();
     openBox.classList.remove("is-expanded", "shows-page");
     openBox.querySelector(".column-page").innerHTML = ""; // unload the page (stops its videos)
     delete columnsWrap.dataset.expanded;
@@ -202,6 +222,23 @@ function scrollAllToTop() {
   columns.forEach((col) => (col.target = 0));
 }
 
+// While the columns resize back from a project page, they're marked as resizing:
+// CSS then lays the narrow columns' text out at its final width (so the widening
+// strips reveal it instead of re-wrapping it) and lets the list fade straight in.
+// Calling again restarts the wait.
+const EXPAND_TIME =
+  parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--expand-time")) * 1000;
+let resizeTimer;
+
+function markResizing() {
+  columnsWrap.classList.add("is-resizing");
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(
+    () => columnsWrap.classList.remove("is-resizing"),
+    EXPAND_TIME + 50 // a little after the columns have settled
+  );
+}
+
 
 // Project pages: clicking a project in the list loads its page (a separate
 // HTML file, e.g. projects/unicos-branding.html) into the open column.
@@ -223,6 +260,7 @@ document.addEventListener("click", (event) => {
 
   if (projectLink) {
     event.preventDefault();
+    if (phone.matches) return openPlaceholder(projectLink); // case studies aren't laid out for phones yet
     const url = projectLink.getAttribute("href");
     if (url !== "#") openProject(url); // "#" = page not built yet
   } else if (backToList) {
@@ -280,6 +318,107 @@ function setSound(wrap, on) {
   button.setAttribute("aria-label", on ? "Turn sound off" : "Turn sound on");
 }
 
+// ---------- Phones: slideshows and the placeholder page ----------
+const placeholder = document.querySelector(".mobile-placeholder");
+const placeholderReel = placeholder.querySelector(".project-reel");
+const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+const REEL_INTERVAL = 1000; // how long each image stays before the next fades in (ms)
+
+const REEL_FOLDER = "assets/Photo/reel/";
+
+// The square photos listed in a category's data-reel (index.html), as full paths
+function reelSources(projects) {
+  return projects.dataset.reel.trim().split(/\s+/).map((name) => REEL_FOLDER + name);
+}
+
+// Fill a slideshow with images (stacked, see CSS), the first one showing.
+// "lazy": on desktop the slideshows are hidden, so their images never load there.
+function fillReel(reel, sources) {
+  reel.innerHTML = sources.map((src) => `<img src="${src}" alt="" loading="lazy">`).join("");
+  reel.firstElementChild.classList.add("is-shown");
+}
+
+// A slideshow of each category's photos, under its project list...
+const categoryLists = [...document.querySelectorAll(".column-projects")];
+
+categoryLists.forEach((projects) => {
+  const reel = document.createElement("div");
+  reel.className = "project-reel";
+  reel.setAttribute("aria-hidden", "true");
+  fillReel(reel, reelSources(projects));
+  projects.append(reel);
+});
+
+// ...and one of all of them on the placeholder page, the categories taking turns
+const allLists = categoryLists.map(reelSources);
+const longest = Math.max(...allLists.map((list) => list.length));
+const mixed = [];
+for (let i = 0; i < longest; i++) {
+  allLists.forEach((list) => list[i] && mixed.push(list[i]));
+}
+fillReel(placeholderReel, mixed);
+
+// Every few seconds, each slideshow on screen fades to its next image.
+// Visitors who prefer less motion keep seeing one still image.
+setInterval(() => {
+  if (reducedMotion.matches) return;
+  document.querySelectorAll(".project-reel").forEach((reel) => {
+    if (!reel.offsetParent) return; // not on screen
+    const shown = reel.querySelector(".is-shown");
+    const next = shown.nextElementSibling || reel.firstElementChild;
+    shown.classList.remove("is-shown");
+    next.classList.add("is-shown");
+  });
+}, REEL_INTERVAL);
+
+// Tapping a project on a phone shows the placeholder page, its slideshow starting
+// with a photo from that project's category. It gets a history entry, so the
+// phone's back gesture closes it.
+let scrollBeforePlaceholder = 0;
+
+function openPlaceholder(projectLink) {
+  const first = reelSources(projectLink.closest(".column-projects"))[0];
+  placeholderReel.querySelectorAll("img").forEach((img) => {
+    img.classList.toggle("is-shown", img.getAttribute("src") === first);
+  });
+
+  scrollBeforePlaceholder = window.scrollY;
+  document.body.classList.add("shows-placeholder");
+  greeting.classList.add("shows-back");
+  window.scrollTo(0, 0);
+  history.pushState({ placeholder: true }, "");
+}
+
+function closePlaceholder() {
+  if (!document.body.classList.contains("shows-placeholder")) return;
+  document.body.classList.remove("shows-placeholder");
+  window.scrollTo(0, scrollBeforePlaceholder); // back to where the list was
+}
+
+window.addEventListener("popstate", closePlaceholder);
+
+// "laptop or desktop": sends the site's address on (the phone's share sheet, e.g.
+// to AirDrop or email it to yourself), or copies it where sharing isn't available.
+// Both only work on https; otherwise (e.g. testing on http) the link is shown instead.
+const shareNote = placeholder.querySelector(".share-note");
+
+placeholder.querySelector(".share-link").addEventListener("click", async () => {
+  const url = location.href.split("#")[0];
+  try {
+    if (navigator.share) {
+      await navigator.share({ title: document.title, url });
+    } else if (navigator.clipboard) {
+      await navigator.clipboard.writeText(url);
+      shareNote.textContent = "Link copied, open it on your computer.";
+    } else {
+      shareNote.textContent = `Open ${url} on your computer.`;
+    }
+  } catch {
+    // the share sheet was closed without sharing
+  }
+});
+
+
 // "← Design projects": back from the page to the project list
 async function closeProject() {
   const openBox = document.querySelector(".column.shows-page");
@@ -288,6 +427,7 @@ async function closeProject() {
   scrollAllToTop();
   const page = openBox.querySelector(".column-page");
   await fadeOutThen(page, () => {
+    markResizing();
     openBox.classList.remove("shows-page");
     page.innerHTML = ""; // unload the page (stops its videos)
     delete columnsWrap.dataset.view; // column narrows back (CSS)

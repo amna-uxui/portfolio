@@ -16,7 +16,7 @@
 
 .column.shows-page .column-page {
   display: block;
-  animation: projects-in 0.7s ease-out 0.1s both;   /* keyframes in home.css */
+  animation: projects-in 0.7s ease-out both;   /* starts as soon as the list is gone; keyframes in home.css */
 }
 
 /* ---------- Page layout ---------- */

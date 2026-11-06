@@ -24,9 +24,8 @@
   /* Open column: projects intro and list */
   --size-projects: clamp(24px, 2.1vw, 40px);
 
-  /* Even smaller sizes for the narrow columns while a project page is open */
+  /* Vertical column titles while a project page is open */
   --size-title-tiny: clamp(15px, 1.25vw, 26px);
-  --size-body-tiny: clamp(12px, 1vw, 20px);
 
   /* Project pages */
   --size-page-title: clamp(30px, 2.5vw, 48px);        /* project name */
@@ -46,6 +45,5 @@
   --greeting-height: 64px;
   --side-padding: clamp(32px, 3.125vw, 60px);
   --side-padding-narrow: 25px;   /* narrow columns while another column is open */
-  --side-padding-tiny: 16px;     /* narrow columns while a project page is open */
   --divider: 1px solid var(--black);
 }

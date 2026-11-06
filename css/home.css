@@ -148,10 +148,13 @@
 .columns[data-expanded="tech"] { grid-template-columns: 1fr 4fr 1fr; }
 .columns[data-expanded="ux"]   { grid-template-columns: 1fr 1fr 4fr; }
 
-/* A project page is open: that column widens further to 8 parts */
-.columns[data-expanded="ui"][data-view="page"]   { grid-template-columns: 8fr 1fr 1fr; }
-.columns[data-expanded="tech"][data-view="page"] { grid-template-columns: 1fr 8fr 1fr; }
-.columns[data-expanded="ux"][data-view="page"]   { grid-template-columns: 1fr 1fr 8fr; }
+/* A project page is open: that column takes almost all the width. The narrow ones
+   only hold a vertical title: an outer one (at the window's edge) gets 6.5 parts of
+   100, an inner one 4.5 (about 125px and 85px on a 1920px screen, like the design).
+   The page itself keeps its own width (project-page.css), so it never moves. */
+.columns[data-expanded="ui"][data-view="page"]   { grid-template-columns: 89fr 4.5fr 6.5fr; }
+.columns[data-expanded="tech"][data-view="page"] { grid-template-columns: 6.5fr 87fr 6.5fr; }
+.columns[data-expanded="ux"][data-view="page"]   { grid-template-columns: 6.5fr 4.5fr 89fr; }
 
 .column {
   overflow: hidden;            /* content moves inside; main.js slides it */
@@ -220,32 +223,84 @@
   font-size: var(--size-body-small);
 }
 
-/* While a project page is open, the narrow columns get even smaller */
+/* While a project page is open, the narrow columns show only their title, written
+   vertically (reading bottom to top), so the case study gets all the attention.
+   Its top lines up with the top of the page. Clicking one still opens that
+   column's project list (see main.js). */
 .columns[data-view="page"] .column:not(.is-expanded) .column-inner {
-  padding: 30px var(--side-padding-tiny) 60px;
-}
-
-.columns[data-view="page"] .column:not(.is-expanded) .column-title {
-  font-size: var(--size-title-tiny);
+  padding: 30px 0 60px;
 }
 
 .columns[data-view="page"] .column:not(.is-expanded) .column-text {
-  font-size: var(--size-body-tiny);
+  display: none;
+}
+
+.columns[data-view="page"] .column:not(.is-expanded) .column-title {
+  width: fit-content;            /* as wide as one line of text */
+  margin: 0 auto;                /* centred in a column between two others... */
+  font-size: var(--size-title-tiny);
+  line-height: 1;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);     /* turn it so it reads upwards */
+  white-space: nowrap;
+  animation: fade-in 0.3s ease 0.1s both;   /* softly replaces the horizontal title */
+}
+
+/* ...but at the window's edges it lines up with "← Go back" (left) and
+   "Download CV" (right), which stay at the normal side padding */
+.columns[data-view="page"] > .column:first-of-type:not(.is-expanded) .column-inner {
+  padding-left: var(--side-padding);
+}
+
+.columns[data-view="page"] > .column:first-of-type:not(.is-expanded) .column-title {
+  margin-left: 0;
+}
+
+.columns[data-view="page"] > .column:last-of-type:not(.is-expanded) .column-inner {
+  padding-right: var(--side-padding);
+}
+
+.columns[data-view="page"] > .column:last-of-type:not(.is-expanded) .column-title {
+  margin-right: 0;
+}
+
+/* A column that turns narrow fades its text in right away (no delay) */
+.columns[data-expanded] .column:not(.is-expanded) .column-summary {
+  transition: opacity 0.3s ease;
+}
+
+/* Back from a project page (class set by main.js while the columns resize): the
+   narrow columns' text is laid out at its final width from the first frame, so the
+   widening strips reveal it like a page sliding open, instead of squeezing and
+   re-wrapping it. 1px is the divider line on the left of the 2nd and 3rd columns. */
+.columns.is-resizing[data-expanded]:not([data-view="page"]) .column:not(.is-expanded) .column-summary {
+  width: calc(100vw / 6 - 2 * var(--side-padding-narrow) - 1px);
+}
+
+.columns.is-resizing[data-expanded]:not([data-view="page"]) .column:first-of-type:not(.is-expanded) .column-summary {
+  width: calc(100vw / 6 - 2 * var(--side-padding-narrow));
+}
+
+.columns.is-resizing[data-expanded]:not([data-view="page"]) .column:not(.is-expanded) .column-text {
+  animation: fade-in 0.4s ease both;
+}
+
+/* ...and takes its final size at once, so the column that was open doesn't shrink
+   its text (and re-wrap it) step by step */
+.columns.is-resizing[data-expanded]:not([data-view="page"]) .column:not(.is-expanded) :is(.column-title, .column-text) {
+  transition: none;
 }
 
 /* Space Mono titles are wide: in the narrow columns (1/6 of the window with a column
-   open, 1/10 with a page open) they shrink only as far as needed for "Technology",
-   10 letters, about 6.2 times the font size, to fit */
-.columns[data-expanded] .column:not(.is-expanded) .column-title.mono {
+   open) they shrink only as far as needed for "Technology", 10 letters, about 6.2
+   times the font size, to fit. Vertical titles (page open) don't need this. */
+.columns[data-expanded]:not([data-view="page"]) .column:not(.is-expanded) .column-title.mono {
   font-size: min(var(--size-title-small), (100vw / 6 - 2 * var(--side-padding-narrow)) / 6.2);
 }
 
-.columns[data-view="page"] .column:not(.is-expanded) .column-title.mono {
-  font-size: min(var(--size-title-tiny), (100vw / 10 - 2 * var(--side-padding-tiny)) / 6.2);
-}
-
 /* "← Go back" and "Download CV" stay in line with the text of the first and
-   last columns, moving in as those columns' side padding shrinks */
+   last columns, moving in as those columns' side padding shrinks (and back out
+   to the normal padding while a project page is open, see above) */
 .greeting,
 .top-bar {
   transition: padding var(--expand-time) var(--ease);
@@ -256,7 +311,7 @@ body:has(.columns[data-expanded] > .column:first-of-type:not(.is-expanded)) .gre
 }
 
 body:has(.columns[data-view="page"] > .column:first-of-type:not(.is-expanded)) .greeting {
-  padding-left: var(--side-padding-tiny);
+  padding-left: var(--side-padding);
 }
 
 body:has(.columns[data-expanded] > .column:last-of-type:not(.is-expanded)) .top-bar {
@@ -264,7 +319,7 @@ body:has(.columns[data-expanded] > .column:last-of-type:not(.is-expanded)) .top-
 }
 
 body:has(.columns[data-view="page"] > .column:last-of-type:not(.is-expanded)) .top-bar {
-  padding-right: var(--side-padding-tiny);
+  padding-right: var(--side-padding);
 }
 
 /* ---------- Open column: summary out, projects in ---------- */
@@ -310,6 +365,11 @@ body:has(.columns[data-view="page"] > .column:last-of-type:not(.is-expanded)) .t
 @keyframes projects-from-center {
   from { opacity: 0; clip-path: inset(0 50%); }
   to   { opacity: 1; clip-path: inset(0 0); }
+}
+
+/* Back from a project page, the list starts fading in as soon as the page is gone */
+.columns.is-resizing .column.is-expanded .column-projects {
+  animation-delay: 0s;
 }
 
 .projects-intro {
@@ -372,4 +432,199 @@ body:has(.columns[data-view="page"] > .column:last-of-type:not(.is-expanded)) .t
   transform: translateY(-50%) scale(1);
 }
 
-/* ---------- Mobile (to be added once the mobile design is ready) ---------- */
+/* ---------- Phones (up to 767px wide) ---------- */
+/* The three sections stack and the page scrolls normally. Tapping a section opens
+   its project list below its text (the other sections fold down to their titles),
+   with a small slideshow of its projects. Tapping a project shows a placeholder
+   page until the case studies have a phone layout. Behaviour: see main.js. */
+
+/* Slideshows and the placeholder page only exist on phones */
+.project-reel,
+.mobile-placeholder {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  :root {
+    --side-padding: 20px;
+    --side-padding-narrow: 20px;
+    --top-bar-height: 48px;
+    --greeting-height: 48px;
+    --size-small: 14px;
+    --size-greeting: 15px;
+    --size-title: 24px;
+    --size-title-small: 24px;
+    --size-body: 17px;
+    --size-body-small: 17px;
+    --size-projects: 17px;
+  }
+
+  /* The page scrolls normally (on desktop only the columns scroll, see main.js) */
+  html,
+  body {
+    height: auto;
+    overflow: visible;
+  }
+
+  /* Sections stacked, with a line between them */
+  .columns {
+    display: block;
+  }
+
+  .column {
+    overflow: visible;
+  }
+
+  .column + .column {
+    border-left: none;
+    border-top: var(--divider);
+  }
+
+  .column-inner {
+    display: block;
+    padding: 16px var(--side-padding) 18px !important;
+    transform: none !important;                          /* ignore the desktop scrolling */
+  }
+
+  .column-title {
+    margin-bottom: 0.5em;
+  }
+
+  /* An open section keeps its text, with its projects below it */
+  .column.is-expanded .column-summary {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .column[data-name] .column-projects {
+    width: auto;
+    justify-self: auto;
+  }
+
+  .column[data-name].is-expanded .column-projects {
+    margin-top: 12px;
+    animation: projects-in 0.5s ease-out both;
+  }
+
+  /* The list's own title and intro are for the wide desktop column only */
+  .column-projects > .column-title,
+  .projects-intro {
+    display: none;
+  }
+
+  /* The other sections fold down to just their titles */
+  .columns[data-expanded] .column:not(.is-expanded) .column-text {
+    display: none;
+  }
+
+  .columns[data-expanded] .column:not(.is-expanded) .column-title,
+  .columns[data-expanded]:not([data-view="page"]) .column:not(.is-expanded) .column-title.mono {
+    font-size: var(--size-title-small);
+    line-height: 1.2;
+    margin-bottom: 0;
+  }
+
+  /* ...in slim rows */
+  .columns[data-expanded] .column:not(.is-expanded) .column-inner {
+    padding-top: 14px !important;
+    padding-bottom: 14px !important;
+  }
+
+  /* Project rows keep their line underneath (as on desktop), but no hover
+     previews (phones can't hover) */
+  .project-link {
+    padding: 0.6em 0;
+  }
+
+  .project-preview {
+    display: none;
+  }
+
+  /* Slideshow of the section's projects, in the bottom-right corner:
+     the images sit on top of each other and fade into one another */
+  .project-reel {
+    display: block;
+    position: relative;
+    width: 100px;
+    aspect-ratio: 1;
+    margin: 20px 0 0 auto;
+    overflow: hidden;
+  }
+
+  /* The photos are square (assets/Photo/reel/), so each one fills the box exactly */
+  .project-reel img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 0.25s ease;   /* quick swap (timing in main.js) */
+  }
+
+  .project-reel img.is-shown {
+    opacity: 1;
+  }
+
+  /* The greeting stays while a section is open; "← Go back" only appears on the
+     placeholder page */
+  .greeting.shows-back:not(.is-open) .greeting-short {
+    display: block;
+  }
+
+  .greeting.shows-back .back-button {
+    display: none;
+  }
+
+  body.shows-placeholder .greeting.shows-back .greeting-short {
+    display: none;
+  }
+
+  body.shows-placeholder .greeting .back-button {
+    display: block;
+    animation: fade-in 0.4s ease both;
+  }
+
+  /* Placeholder page: message at the top, slideshow of every project at the bottom */
+  body.shows-placeholder .columns {
+    display: none;
+  }
+
+  body.shows-placeholder .mobile-placeholder {
+    display: flex;
+    flex-direction: column;
+    min-height: calc(100vh - var(--top-bar-height) - var(--greeting-height));
+    min-height: calc(100svh - var(--top-bar-height) - var(--greeting-height));
+    padding: 32px var(--side-padding) 20px;
+    animation: fade-in 0.4s ease both;
+  }
+
+  .placeholder-text {
+    font-size: 20px;
+    line-height: 1.2;
+  }
+
+  /* "laptop or desktop": sends the site's address on (see main.js) */
+  .share-link {
+    font: inherit;
+    color: inherit;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  .share-link span {
+    color: var(--blue);
+  }
+
+  .share-note {
+    min-height: 1.2em;           /* room for the note, so nothing jumps when it appears */
+    margin: 0.6em 0 32px;
+    font-size: 15px;
+    color: var(--blue);
+  }
+
+  .mobile-placeholder .project-reel {
+    margin: auto 0 0 auto;       /* bottom-right corner of the page, same size as above */
+  }
+}
