@@ -16,7 +16,7 @@
   <!-- "?v=…": bump a file's number after editing it, so browsers fetch the new copy -->
   <link rel="stylesheet" href="css/variables.css?v=4">
   <link rel="stylesheet" href="css/base.css?v=2">
-  <link rel="stylesheet" href="css/home.css?v=16">
+  <link rel="stylesheet" href="css/home.css?v=17">
   <link rel="stylesheet" href="css/project-page.css?v=13">
 </head>
 <body>
@@ -72,11 +72,8 @@
           </p>
         </div>
 
-        <!-- Projects, shown when this column is clicked.
-             data-reel: square photos for the phone slideshow (assets/Photo/reel/) -->
-        <div class="column-projects"
-             data-reel="ui-unicos-tunnel.jpg ui-bisses-path.jpg ui-particle-fever.jpg ui-rug-leaves.jpg
-                        ui-rug-drawing.jpg ui-decoding.jpg ui-mosaic.jpg ui-rug-smiley.jpg">
+        <!-- Projects, shown when this column is clicked -->
+        <div class="column-projects">
           <h2 class="column-title">Design projects</h2>
           <p class="projects-intro">
             Over the years, I’ve worked on a variety of projects that showcase my
@@ -138,8 +135,7 @@
         </div>
 
         <!-- Projects, shown when this column is clicked (opens from the center) -->
-        <div class="column-projects"
-             data-reel="tech-cms.jpg tech-control-room-1.jpg tech-keyboards.jpg tech-control-room-2.jpg">
+        <div class="column-projects">
           <h2 class="column-title">Technology</h2>
           <p class="projects-intro">
             Over the years, I’ve worked on a variety of projects that showcase my
@@ -181,9 +177,7 @@
         </div>
 
         <!-- Projects, shown when this column is clicked -->
-        <div class="column-projects"
-             data-reel="ux-workshop-1.jpg ux-lost-found-1.jpg ux-workshop-2.jpg ux-lost-found-2.jpg
-                        ux-interview.jpg ux-workshop-3.jpg ux-lost-found-3.jpg ux-lost-found-4.jpg">
+        <div class="column-projects">
           <h2 class="column-title">Experience Design</h2>
           <p class="projects-intro">
             Research gives my work direction. Through observation, questioning, testing,
@@ -222,7 +216,7 @@
   </main>
 
   <!-- Phones only: shown instead of a case study, until the case studies have a
-       phone layout. Its slideshow of every project is filled in by main.js. -->
+       phone layout. Its slideshow is filled in by main.js. -->
   <section class="mobile-placeholder">
     <p class="placeholder-text">
       Hey, thanks for stopping by!<br>
@@ -235,6 +229,6 @@
     <div class="project-reel" aria-hidden="true"></div>
   </section>
 
-  <script src="js/main.js?v=9"></script>
+  <script src="js/main.js?v=10"></script>
 </body>
 </html>

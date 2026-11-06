@@ -570,7 +570,7 @@ body:has(.columns[data-view="page"] > .column:last-of-type:not(.is-expanded)) .t
     overflow: hidden;
   }
 
-  /* The photos are square (assets/Photo/reel/), so each one fills the box exactly */
+  /* The images are 100×100 squares (assets/Photo/reel/), the same size as the box */
   .project-reel img {
     position: absolute;
     inset: 0;
@@ -578,7 +578,7 @@ body:has(.columns[data-view="page"] > .column:last-of-type:not(.is-expanded)) .t
     height: 100%;
     object-fit: cover;
     opacity: 0;
-    transition: opacity 0.25s ease;   /* quick swap (timing in main.js) */
+    transition: opacity 0.1s ease;   /* near-instant swap (timing in main.js) */
   }
 
   .project-reel img.is-shown {

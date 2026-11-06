@@ -260,7 +260,7 @@ document.addEventListener("click", (event) => {
 
   if (projectLink) {
     event.preventDefault();
-    if (phone.matches) return openPlaceholder(projectLink); // case studies aren't laid out for phones yet
+    if (phone.matches) return openPlaceholder(); // case studies aren't laid out for phones yet
     const url = projectLink.getAttribute("href");
     if (url !== "#") openProject(url); // "#" = page not built yet
   } else if (backToList) {
@@ -322,43 +322,33 @@ function setSound(wrap, on) {
 const placeholder = document.querySelector(".mobile-placeholder");
 const placeholderReel = placeholder.querySelector(".project-reel");
 const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-const REEL_INTERVAL = 1000; // how long each image stays before the next fades in (ms)
+const REEL_INTERVAL = 500; // how long each image stays before the next one (ms)
 
+// The slideshow images, in order: 100×100 squares from the "mobile version"
+// Figma frames (Rectangle 7–17), copied to assets/Photo/reel/ as 01–11.png
 const REEL_FOLDER = "assets/Photo/reel/";
+const REEL_IMAGES = ["01.png", "02.png", "03.png", "04.png", "05.png", "06.png",
+                     "07.png", "08.png", "09.png", "10.png", "11.png"];
 
-// The square photos listed in a category's data-reel (index.html), as full paths
-function reelSources(projects) {
-  return projects.dataset.reel.trim().split(/\s+/).map((name) => REEL_FOLDER + name);
-}
-
-// Fill a slideshow with images (stacked, see CSS), the first one showing.
+// Fill a slideshow with the images (stacked, see CSS), the first one showing.
 // "lazy": on desktop the slideshows are hidden, so their images never load there.
-function fillReel(reel, sources) {
-  reel.innerHTML = sources.map((src) => `<img src="${src}" alt="" loading="lazy">`).join("");
+function fillReel(reel) {
+  reel.innerHTML = REEL_IMAGES
+    .map((name) => `<img src="${REEL_FOLDER + name}" alt="" loading="lazy">`).join("");
   reel.firstElementChild.classList.add("is-shown");
 }
 
-// A slideshow of each category's photos, under its project list...
-const categoryLists = [...document.querySelectorAll(".column-projects")];
-
-categoryLists.forEach((projects) => {
+// One slideshow under each section's project list, and one on the placeholder page
+document.querySelectorAll(".column-projects").forEach((projects) => {
   const reel = document.createElement("div");
   reel.className = "project-reel";
   reel.setAttribute("aria-hidden", "true");
-  fillReel(reel, reelSources(projects));
+  fillReel(reel);
   projects.append(reel);
 });
+fillReel(placeholderReel);
 
-// ...and one of all of them on the placeholder page, the categories taking turns
-const allLists = categoryLists.map(reelSources);
-const longest = Math.max(...allLists.map((list) => list.length));
-const mixed = [];
-for (let i = 0; i < longest; i++) {
-  allLists.forEach((list) => list[i] && mixed.push(list[i]));
-}
-fillReel(placeholderReel, mixed);
-
-// Every few seconds, each slideshow on screen fades to its next image.
+// Every half second, each slideshow on screen switches to its next image.
 // Visitors who prefer less motion keep seeing one still image.
 setInterval(() => {
   if (reducedMotion.matches) return;
@@ -371,17 +361,11 @@ setInterval(() => {
   });
 }, REEL_INTERVAL);
 
-// Tapping a project on a phone shows the placeholder page, its slideshow starting
-// with a photo from that project's category. It gets a history entry, so the
-// phone's back gesture closes it.
+// Tapping a project on a phone shows the placeholder page. It gets a history
+// entry, so the phone's back gesture closes it.
 let scrollBeforePlaceholder = 0;
 
-function openPlaceholder(projectLink) {
-  const first = reelSources(projectLink.closest(".column-projects"))[0];
-  placeholderReel.querySelectorAll("img").forEach((img) => {
-    img.classList.toggle("is-shown", img.getAttribute("src") === first);
-  });
-
+function openPlaceholder() {
   scrollBeforePlaceholder = window.scrollY;
   document.body.classList.add("shows-placeholder");
   greeting.classList.add("shows-back");
