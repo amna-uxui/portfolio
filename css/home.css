@@ -570,7 +570,7 @@ body:has(.columns[data-view="page"] > .column:last-of-type:not(.is-expanded)) .t
     overflow: hidden;
   }
 
-  /* The images are 100×100 squares (assets/Photo/reel/), the same size as the box */
+  /* The images are squares (assets/Photo/reel/, 300×300 = 3x the box), so each fills it exactly */
   .project-reel img {
     position: absolute;
     inset: 0;

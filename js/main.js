@@ -324,8 +324,9 @@ const placeholderReel = placeholder.querySelector(".project-reel");
 const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 const REEL_INTERVAL = 500; // how long each image stays before the next one (ms)
 
-// The slideshow images, in order: 100×100 squares from the "mobile version"
-// Figma frames (Rectangle 7–17), copied to assets/Photo/reel/ as 01–11.png
+// The slideshow images, in order: squares exported at 3x (300×300, sharp on phone
+// screens) from the "mobile version" Figma frames (Rectangle 7–17), copied to
+// assets/Photo/reel/ as 01–11.png
 const REEL_FOLDER = "assets/Photo/reel/";
 const REEL_IMAGES = ["01.png", "02.png", "03.png", "04.png", "05.png", "06.png",
                      "07.png", "08.png", "09.png", "10.png", "11.png"];
