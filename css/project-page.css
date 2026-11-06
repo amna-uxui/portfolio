@@ -580,7 +580,7 @@
   stroke: var(--blue);
 }
 
-/* ---------- Pieces used on the Transversal Workshop page ---------- */
+/* ---------- Pieces used on the Transversal Workshops page ---------- */
 /* Three rugs side by side, edge to edge like the design */
 .rug-row {
   display: grid;
@@ -632,6 +632,28 @@
   object-fit: cover;             /* fill the tile, cropping if a file isn't exactly 9:16 */
 }
 
+/* Re-structure process photos: three columns (303 / 320 / 308 of 976px in the design),
+   each a stack of images at their own shape */
+.process-columns {
+  display: grid;
+  grid-template-columns: 303fr 320fr 308fr;
+  column-gap: 2.36%;
+  align-items: start;
+  margin-bottom: var(--space-block);
+}
+
+.process-columns > div {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.process-columns img,
+.process-columns .page-video {
+  width: 100%;
+  margin: 0;
+}
+
 /* ---------- Pieces used on the two UNICOS pages ---------- */
 /* Project scope: three circles touching at the top, drawn at the design's size
    (600 wide = 593 of 1400px) and scaled to the column. Highlighted circles are beige. */
@@ -668,6 +690,12 @@
 .scope-circles--mono text {
   font-family: var(--font-mono);
   font-size: 30px;
+}
+
+/* Italic closing note, e.g. the NDA notice on the Logitech page */
+.project-page .page-note {
+  font-style: italic;
+  margin-top: var(--space-block);
 }
 
 /* "Step:1 Analyzing old panel": bold black step titles */

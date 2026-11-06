@@ -1,7 +1,8 @@
-<!-- Transversal Workshop - ECAL (two projects on one page)
+<!-- Transversal Workshops - ECAL (three projects on one page, divided by lines)
      Loaded into the UI Design column when the project is clicked (see main.js).
      Images and videos: assets/Photo/project Images/UI Design/ECAL/web/
-     Every video sits in a video-wrap; main.js adds its sound button. -->
+     Videos with sound sit in a video-wrap, where main.js adds a sound button;
+     silent videos are left without one. -->
 
 <article class="project-page">
 
@@ -101,8 +102,62 @@
 
   <hr class="page-divider">
 
-  <!-- ========== Project 2: Modular Mindset ========== -->
-  <h1 class="page-title">2- Modular Mindset - Animation for music label</h1>
+  <!-- ========== Project 2: RNDRStudio x ECAL ========== -->
+  <h1 class="page-title">
+    2- <a class="text-link" href="https://rndr.studio/" target="_blank" rel="noopener">RNDRStudio</a> x ECAL<br>
+    Re-structure Workshop - Sledgehammer
+  </h1>
+  <p class="page-intro">
+    During this one-week workshop at ECAL, we used machine learning tools to decompose music
+    videos into their constituent parts: segmented scenes, detected gestures, extracted colors,
+    analyzed beats, separated audio stems, transforming linear audiovisual artifacts into
+    structured datasets. These components were then reimagined as interactive, non-linear
+    systems: explorable maps, generative timelines, rhythm-driven interfaces, and
+    self-recomposing structures built with the OPENRNDR framework.
+  </p>
+
+  <!-- The final piece, projected in the room (has sound, so it gets a sound button) -->
+  <div class="video-wrap page-media-top">
+    <video class="page-video" autoplay muted loop playsinline
+           poster="assets/Photo/project%20Images/UI%20Design/ECAL/web/sledgehammer-poster.jpg"
+           src="assets/Photo/project%20Images/UI%20Design/ECAL/web/sledgehammer.mp4"></video>
+  </div>
+
+  <section class="page-section">
+    <h2 class="page-heading page-heading--tight">Roles and Responsibilities:</h2>
+    <p>
+      For this workshop, I worked with
+      <a class="text-link" href="https://ecal.ch/en/school/network/people/sina-fathollahi/" target="_blank" rel="noopener">Sina</a>
+      and
+      <a class="text-link" href="https://ecal.ch/en/school/network/people/seoyun-choi/" target="_blank" rel="noopener">Seoyun</a>.
+      We generated and explored ideas together as a team, combining our perspectives to shape
+      the concepts we took forward. The end result was a audio/visual digital experience which
+      we presented our outcome to the audience.
+    </p>
+  </section>
+
+  <!-- Process photos in three columns, each image at its own shape (widths from the design) -->
+  <div class="process-columns">
+    <div>
+      <img src="assets/Photo/project%20Images/UI%20Design/ECAL/web/restructure-team.jpg" alt="The team working on laptops during the workshop">
+      <!-- Silent clip: no video-wrap, so no sound button -->
+      <video class="page-video" autoplay muted loop playsinline
+             poster="assets/Photo/project%20Images/UI%20Design/ECAL/web/restructure-spiral-poster.jpg"
+             src="assets/Photo/project%20Images/UI%20Design/ECAL/web/restructure-spiral.mp4"></video>
+    </div>
+    <div>
+      <img src="assets/Photo/project%20Images/UI%20Design/ECAL/web/restructure-board.jpg" alt="Board of music video frames grouped and annotated by theme">
+      <img src="assets/Photo/project%20Images/UI%20Design/ECAL/web/restructure-audience.jpg" alt="A visitor's silhouette in front of a projected mosaic of a face">
+    </div>
+    <div>
+      <img src="assets/Photo/project%20Images/UI%20Design/ECAL/web/restructure-laptop.jpg" alt="A laptop rendering a face as a grid of pixels">
+    </div>
+  </div>
+
+  <hr class="page-divider">
+
+  <!-- ========== Project 3: Modular Mindset ========== -->
+  <h1 class="page-title">3- Modular Mindset - Animation for music label</h1>
   <p class="page-intro">
     As part of a semester workshop, I was tasked with creating a modular, animated visual
     identity for a fictional music label, exploring the intersection of motion design and
@@ -113,23 +168,9 @@
     large-format billboards.
   </p>
 
-  <!-- Wide video first, then the two square videos side by side.
-       No video-wrap, so no sound button: this clip is silent. -->
+  <!-- No video-wrap, so no sound button: this clip is silent -->
   <video class="page-video page-media-top" autoplay muted loop playsinline
          poster="assets/Photo/project%20Images/UI%20Design/ECAL/web/phone-stand-poster.jpg"
          src="assets/Photo/project%20Images/UI%20Design/ECAL/web/phone-stand.mp4"></video>
-
-  <div class="page-split page-split--tight">
-    <div class="video-wrap">
-      <video class="page-video" autoplay muted loop playsinline
-             poster="assets/Photo/project%20Images/UI%20Design/ECAL/web/particle-fever-poster.jpg"
-             src="assets/Photo/project%20Images/UI%20Design/ECAL/web/particle-fever.mp4"></video>
-    </div>
-    <div class="video-wrap">
-      <video class="page-video" autoplay muted loop playsinline
-             poster="assets/Photo/project%20Images/UI%20Design/ECAL/web/phone-hand-poster.jpg"
-             src="assets/Photo/project%20Images/UI%20Design/ECAL/web/phone-hand.mp4"></video>
-    </div>
-  </div>
 
 </article>
