@@ -530,6 +530,25 @@ body:has(.columns[data-view="page"] > .column:last-of-type:not(.is-expanded)) .t
     padding-bottom: 14px !important;
   }
 
+  /* No hover effects on phones: a tap would leave text blue or arrows nudged */
+  .column:not(.is-expanded):hover .column-text,
+  .project-link:hover,
+  .name-button:hover,
+  .back-button:hover {
+    color: inherit;
+  }
+
+  .project-link:hover::before,
+  .name-button:hover .name-arrow,
+  .greeting.is-open:hover .intro-close {
+    transform: none;
+  }
+
+  .cv-link:hover,
+  .intro-link:hover {
+    text-decoration: none;
+  }
+
   /* Project rows keep their line underneath (as on desktop), but no hover
      previews (phones can't hover) */
   .project-link {
