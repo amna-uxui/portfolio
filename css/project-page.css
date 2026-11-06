@@ -604,11 +604,32 @@
   position: absolute;
 }
 
-/* Portrait (phone) video, centred, about as tall as the design's image */
-.video-wrap--portrait {
-  width: 30%;
-  margin-left: auto;
-  margin-right: auto;
+/* Final results: the video large on the left, stills on the right (sizes from the design) */
+.result-feature {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: var(--space-block);
+}
+
+.result-feature > .video-wrap {
+  width: 36.8%;
+  margin-bottom: 0;              /* the row handles the spacing */
+}
+
+/* Two columns of stills; the rows line up with the video's top and bottom */
+.result-stills {
+  width: 38.15%;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 11.14%;            /* % of this grid's width */
+  align-content: space-between;
+}
+
+.result-feature .page-video,
+.result-stills > img {           /* only the stills, not the sound button's icons */
+  width: 100%;
+  aspect-ratio: 9 / 16;
+  object-fit: cover;             /* fill the tile, cropping if a file isn't exactly 9:16 */
 }
 
 /* ---------- Pieces used on the two UNICOS pages ---------- */

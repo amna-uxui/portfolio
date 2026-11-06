@@ -84,12 +84,22 @@
     </p>
   </section>
 
-  <!-- The prototype video (portrait, filmed on a phone), centred -->
-  <div class="video-wrap video-wrap--portrait">
-    <video class="page-video" autoplay muted loop playsinline
-           poster="assets/Photo/project%20Images/UI%20Design/ECAL/web/tapis-prototype-poster.jpg"
-           src="assets/Photo/project%20Images/UI%20Design/ECAL/web/tapis-prototype.mp4"></video>
+  <!-- The prototype video large on the left, stills in a small grid on the right
+       (all portrait 9:16) -->
+  <div class="result-feature">
+    <div class="video-wrap">
+      <video class="page-video" autoplay muted loop playsinline
+             poster="assets/Photo/project%20Images/UI%20Design/ECAL/web/tapis-prototype-poster.jpg"
+             src="assets/Photo/project%20Images/UI%20Design/ECAL/web/tapis-prototype.mp4"></video>
+    </div>
+    <div class="result-stills">
+      <img src="assets/Photo/project%20Images/UI%20Design/ECAL/web/tapis-still-leaves.jpg" alt="Painting a leaf pattern onto the green rug on a phone">
+      <img src="assets/Photo/project%20Images/UI%20Design/ECAL/web/tapis-still-smiley.jpg" alt="A smiley drawn into the brown rug's pile on a phone">
+      <img src="assets/Photo/project%20Images/UI%20Design/ECAL/web/tapis-still-paint.jpg" alt="The green rug's &quot;To paint&quot; screen on a phone">
+    </div>
   </div>
+
+  <hr class="page-divider">
 
   <!-- ========== Project 2: Modular Mindset ========== -->
   <h1 class="page-title">2- Modular Mindset - Animation for music label</h1>
@@ -103,8 +113,13 @@
     large-format billboards.
   </p>
 
-  <!-- Two square videos side by side -->
-  <div class="page-split page-split--tight page-media-top">
+  <!-- Wide video first, then the two square videos side by side.
+       No video-wrap, so no sound button: this clip is silent. -->
+  <video class="page-video page-media-top" autoplay muted loop playsinline
+         poster="assets/Photo/project%20Images/UI%20Design/ECAL/web/phone-stand-poster.jpg"
+         src="assets/Photo/project%20Images/UI%20Design/ECAL/web/phone-stand.mp4"></video>
+
+  <div class="page-split page-split--tight">
     <div class="video-wrap">
       <video class="page-video" autoplay muted loop playsinline
              poster="assets/Photo/project%20Images/UI%20Design/ECAL/web/particle-fever-poster.jpg"
@@ -115,12 +130,6 @@
              poster="assets/Photo/project%20Images/UI%20Design/ECAL/web/phone-hand-poster.jpg"
              src="assets/Photo/project%20Images/UI%20Design/ECAL/web/phone-hand.mp4"></video>
     </div>
-  </div>
-
-  <div class="video-wrap">
-    <video class="page-video" autoplay muted loop playsinline
-           poster="assets/Photo/project%20Images/UI%20Design/ECAL/web/phone-stand-poster.jpg"
-           src="assets/Photo/project%20Images/UI%20Design/ECAL/web/phone-stand.mp4"></video>
   </div>
 
 </article>
