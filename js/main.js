@@ -84,12 +84,21 @@ function clamp(value, min, max) {
   return Math.min(Math.max(value, min), max);
 }
 
+// The open case study's "← back" bar, kept at the top of its column while the
+// page scrolls (set in openProject): { col, bar }, or null when no page is open
+let pinnedBar = null;
+
 // Every frame: move each column and gallery a small step closer to its target
 function animate() {
   columns.forEach((col) => {
     col.current += (col.target - col.current) * EASE;
     col.content.style.transform = `translateY(${-col.current}px)`;
   });
+
+  // The bar moves down exactly as far as its page moves up, so it stays put
+  if (pinnedBar) {
+    pinnedBar.bar.style.transform = `translateY(${pinnedBar.col.current}px)`;
+  }
 
   galleries.forEach((state, gallery) => {
     state.current += (state.target - state.current) * EASE;
@@ -103,7 +112,7 @@ animate();
 
 
 // Intro: clicking "Amna" opens the full intro in the greeting strip,
-// clicking anywhere on the beige strip closes it again.
+// clicking anywhere on the strip closes it again.
 const greeting = document.querySelector(".greeting");
 const nameButton = document.querySelector(".name-button");
 
@@ -111,7 +120,7 @@ greeting.addEventListener("click", (event) => {
   if (event.target.closest("a")) return; // CERN / Logitech links just open
 
   if (event.target.closest(".back-button")) {
-    // "← Go back" returns to the home view (on phones: leaves the placeholder page,
+    // "← Home" returns to the home view (on phones: leaves the placeholder page,
     // like the phone's own back gesture)
     if (document.body.classList.contains("shows-placeholder")) history.back();
     else closeColumn();
@@ -156,7 +165,7 @@ columns.forEach((col) => {
     const hasProjects = col.box.querySelector(".column-projects") !== null;
 
     // Close whichever is open (if any). When switching straight to another
-    // column, we're not going home, so "← Go back" stays put.
+    // column, we're not going home, so "← Home" stays put.
     await closeColumn({ goingHome: !hasProjects });
     if (hasProjects) openColumn(col);
 
@@ -174,7 +183,7 @@ document.addEventListener("keydown", (event) => {
 
 function openColumn(col) {
   if (greeting.classList.contains("is-open")) setIntroOpen(false); // tuck the intro away
-  greeting.classList.add("shows-back");   // greeting becomes "← Go back"
+  greeting.classList.add("shows-back");   // greeting becomes "← Home"
 
   columnsWrap.dataset.expanded = col.box.dataset.name;
   col.box.classList.add("is-expanded");
@@ -187,7 +196,7 @@ async function closeColumn({ goingHome = true } = {}) {
   if (!openBox) return;
 
   if (goingHome) {
-    greeting.classList.remove("shows-back"); // "← Go back" becomes the greeting again
+    greeting.classList.remove("shows-back"); // "← Home" becomes the greeting again
   }
 
   const leavingPage = openBox.classList.contains("shows-page");
@@ -199,10 +208,20 @@ async function closeColumn({ goingHome = true } = {}) {
     if (leavingPage) markResizing();
     openBox.classList.remove("is-expanded", "shows-page");
     openBox.querySelector(".column-page").innerHTML = ""; // unload the page (stops its videos)
+    pinnedBar = null;
+    jumpToTop(openBox); // its summary shows in place, instead of sliding down from where the page was
     delete columnsWrap.dataset.expanded;
     delete columnsWrap.dataset.view;
   });
   scrollAllToTop();
+}
+
+// Put a column straight back at the top, without gliding. Used while its content
+// is invisible and being swapped, so the new content doesn't slide in from above.
+function jumpToTop(box) {
+  const col = columns.find((c) => c.box === box);
+  col.target = col.current = 0;
+  col.content.style.transform = "translateY(0px)";
 }
 
 // Fade an element out, run `change` while it's invisible, then clear the fade
@@ -290,12 +309,26 @@ async function openProject(url) {
   page.innerHTML = await (await fetch(url, { cache: "no-cache" })).text();
   galleries.clear();      // forget galleries from a previously opened page
   addSoundButtons(page);  // every video gets a sound button
+  pinBackButton(openBox, page);
 
   columnsWrap.dataset.view = "page"; // column starts widening (CSS)
-  scrollAllToTop();
   await fadeOutThen(openBox.querySelector(".column-projects"), () => {
+    jumpToTop(openBox);
     openBox.classList.add("shows-page"); // list out, page fades in (CSS)
   });
+}
+
+// Wrap the page's "← Design projects" button in a bar that stays at the top of
+// the column while the case study scrolls (see animate), so the way back to the
+// project list is always in reach
+function pinBackButton(openBox, page) {
+  const back = page.querySelector(".page-back");
+  if (!back) return;
+  const bar = document.createElement("div");
+  bar.className = "page-bar";
+  back.before(bar);
+  bar.append(back);
+  pinnedBar = { col: columns.find((c) => c.box === openBox), bar };
 }
 
 // Put a sound button (speaker icons on a circle) on every video in a page.
@@ -404,17 +437,19 @@ placeholder.querySelector(".share-link").addEventListener("click", async () => {
 });
 
 
-// "← Design projects": back from the page to the project list
+// "← Design projects": back from the page to the project list. The page fades out
+// where it is, then the list appears at the top (no scrolling back up first).
 async function closeProject() {
   const openBox = document.querySelector(".column.shows-page");
   if (!openBox) return;
 
-  scrollAllToTop();
   const page = openBox.querySelector(".column-page");
   await fadeOutThen(page, () => {
     markResizing();
     openBox.classList.remove("shows-page");
     page.innerHTML = ""; // unload the page (stops its videos)
+    pinnedBar = null;
+    jumpToTop(openBox);
     delete columnsWrap.dataset.view; // column narrows back (CSS)
   });
 }

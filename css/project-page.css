@@ -37,15 +37,16 @@
   line-height: 1.17;
 }
 
-/* "← Design projects": back to the project list */
+/* "← Design projects": back to the project list. Smaller than the project's
+   title below it, as it stays on screen the whole time (see .page-bar). */
 .page-back {
   font: inherit;
-  font-size: var(--size-title);
+  font-size: var(--size-page-subheading);
   color: var(--blue);
   background: none;
   border: none;
   cursor: pointer;
-  margin-bottom: 0.3em;
+  margin-bottom: 16px;           /* gap to the project's title */
 }
 
 .page-back-arrow {
@@ -57,11 +58,26 @@
   transform: translateX(-6px);   /* arrow nudges left on hover */
 }
 
+/* The bar around "← Design projects" (added by main.js) stays at the top of the
+   column while the case study scrolls, so the way back to the project list is
+   always in reach. Its white background reaches up over the column's top padding
+   (30px, .column-inner in home.css) and hides the page passing underneath, across
+   the whole column (the bar reaches past both sides; the column cuts it off).
+   The label sits 24px below the divider line, level with the vertical titles of
+   the narrow columns (home.css). */
+.page-bar {
+  position: relative;
+  z-index: 3;                    /* above the page's images and videos */
+  margin: -30px -100vw 0 calc(-1 * var(--side-padding));
+  padding: 24px 100vw 0 var(--side-padding);
+  background: var(--white);
+}
+
 .page-title {
   font-size: var(--size-page-title);
   font-weight: 400;
   color: var(--blue);
-  margin-bottom: 0.7em;
+  margin-bottom: 0.5em;          /* 24px on a large screen */
 }
 
 .page-hero {
@@ -487,11 +503,6 @@
 .project-page .page-intro--large {
   font-size: var(--size-page-subheading);
   margin-bottom: calc(var(--space-block) / 2);   /* 32px */
-}
-
-/* Back button with a set 24px gap above the page title */
-.page-back--spaced {
-  margin-bottom: 24px;
 }
 
 /* Section with half the usual space below it (Roles and Responsibilities) */

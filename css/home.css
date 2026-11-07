@@ -24,7 +24,8 @@
    the two is animated in main.js; CSS only swaps the text and fades it in. */
 .greeting {
   padding: 0 var(--side-padding);
-  background: var(--beige);
+  background: var(--white);
+  border-bottom: var(--divider);   /* line between the strip and the columns */
   font-size: var(--size-greeting);
   overflow: hidden;            /* hide content while the strip is resizing */
 }
@@ -67,7 +68,7 @@
   transform: translateY(3px);
 }
 
-/* "← Go back": hidden on the home view */
+/* "← Home": hidden on the home view */
 .back-button {
   display: none;
   font: inherit;
@@ -84,7 +85,7 @@
   color: var(--blue);
 }
 
-/* While a column is open (class added by main.js): swap greeting for "Go back" */
+/* While a column is open (class added by main.js): swap greeting for "← Home" */
 .greeting.shows-back .greeting-short {
   display: none;
 }
@@ -228,7 +229,7 @@
    Its top lines up with the top of the page. Clicking one still opens that
    column's project list (see main.js). */
 .columns[data-view="page"] .column:not(.is-expanded) .column-inner {
-  padding: 30px 0 60px;
+  padding: 24px 0 60px;   /* level with the case study's "← back" label (project-page.css) */
 }
 
 .columns[data-view="page"] .column:not(.is-expanded) .column-text {
@@ -246,7 +247,7 @@
   animation: fade-in 0.3s ease 0.1s both;   /* softly replaces the horizontal title */
 }
 
-/* ...but at the window's edges it lines up with "← Go back" (left) and
+/* ...but at the window's edges it lines up with "← Home" (left) and
    "Download CV" (right), which stay at the normal side padding */
 .columns[data-view="page"] > .column:first-of-type:not(.is-expanded) .column-inner {
   padding-left: var(--side-padding);
@@ -281,13 +282,32 @@
   width: calc(100vw / 6 - 2 * var(--side-padding-narrow));
 }
 
-.columns.is-resizing[data-expanded]:not([data-view="page"]) .column:not(.is-expanded) .column-text {
+/* ...takes its final size at once, so the column that was open doesn't shrink
+   its text (and re-wrap it) step by step, and fades in (the vertical titles
+   don't snap to horizontal ones) */
+.columns.is-resizing[data-expanded]:not([data-view="page"]) .column:not(.is-expanded) :is(.column-title, .column-text) {
+  transition: none;
   animation: fade-in 0.4s ease both;
 }
 
-/* ...and takes its final size at once, so the column that was open doesn't shrink
-   its text (and re-wrap it) step by step */
-.columns.is-resizing[data-expanded]:not([data-view="page"]) .column:not(.is-expanded) :is(.column-title, .column-text) {
+/* Back home from a project page: the same, at the home view's column width */
+.columns.is-resizing:not([data-expanded]) .column-summary {
+  width: calc(100vw / 3 - 2 * var(--side-padding) - 1px);
+}
+
+.columns.is-resizing:not([data-expanded]) .column:first-of-type .column-summary {
+  width: calc(100vw / 3 - 2 * var(--side-padding));
+}
+
+.columns.is-resizing:not([data-expanded]) :is(.column-title, .column-text) {
+  transition: none;
+  animation: fade-in 0.4s ease both;
+}
+
+/* From a project page straight to another column: the column that opens hides
+   its vertical title at once, instead of fading it out while it grows back to a
+   big horizontal title */
+.columns.is-resizing .column.is-expanded .column-summary {
   transition: none;
 }
 
@@ -298,7 +318,7 @@
   font-size: min(var(--size-title-small), (100vw / 6 - 2 * var(--side-padding-narrow)) / 6.2);
 }
 
-/* "← Go back" and "Download CV" stay in line with the text of the first and
+/* "← Home" and "Download CV" stay in line with the text of the first and
    last columns, moving in as those columns' side padding shrinks (and back out
    to the normal padding while a project page is open, see above) */
 .greeting,
@@ -585,7 +605,7 @@ body:has(.columns[data-view="page"] > .column:last-of-type:not(.is-expanded)) .t
     opacity: 1;
   }
 
-  /* The greeting stays while a section is open; "← Go back" only appears on the
+  /* The greeting stays while a section is open; "← Home" only appears on the
      placeholder page */
   .greeting.shows-back:not(.is-open) .greeting-short {
     display: block;
@@ -612,8 +632,8 @@ body:has(.columns[data-view="page"] > .column:last-of-type:not(.is-expanded)) .t
   body.shows-placeholder .mobile-placeholder {
     display: flex;
     flex-direction: column;
-    min-height: calc(100vh - var(--top-bar-height) - var(--greeting-height));
-    min-height: calc(100svh - var(--top-bar-height) - var(--greeting-height));
+    min-height: calc(100vh - var(--top-bar-height) - var(--greeting-height) - 1px);   /* 1px: the strip's divider line */
+    min-height: calc(100svh - var(--top-bar-height) - var(--greeting-height) - 1px);
     padding: 32px var(--side-padding) 20px;
     animation: fade-in 0.4s ease both;
   }
