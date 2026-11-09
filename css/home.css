@@ -247,18 +247,20 @@
   animation: fade-in 0.3s ease 0.1s both;   /* softly replaces the horizontal title */
 }
 
-/* ...but at the window's edges it lines up with "← Home" (left) and
-   "Download CV" (right), which stay at the normal side padding */
-.columns[data-view="page"] > .column:first-of-type:not(.is-expanded) .column-inner {
+/* At the window's edges, narrow columns keep the normal side padding, so their
+   text stays in line with "← Home" (left) and "Download CV" (right), which never
+   move. Only the sides next to a divider line get the narrow padding. */
+.columns[data-expanded] > .column:first-of-type:not(.is-expanded) .column-inner {
   padding-left: var(--side-padding);
 }
 
-.columns[data-view="page"] > .column:first-of-type:not(.is-expanded) .column-title {
-  margin-left: 0;
+.columns[data-expanded] > .column:last-of-type:not(.is-expanded) .column-inner {
+  padding-right: var(--side-padding);
 }
 
-.columns[data-view="page"] > .column:last-of-type:not(.is-expanded) .column-inner {
-  padding-right: var(--side-padding);
+/* ...and a vertical title there sits against that padding instead of being centred */
+.columns[data-view="page"] > .column:first-of-type:not(.is-expanded) .column-title {
+  margin-left: 0;
 }
 
 .columns[data-view="page"] > .column:last-of-type:not(.is-expanded) .column-title {
@@ -273,13 +275,18 @@
 /* Back from a project page (class set by main.js while the columns resize): the
    narrow columns' text is laid out at its final width from the first frame, so the
    widening strips reveal it like a page sliding open, instead of squeezing and
-   re-wrapping it. 1px is the divider line on the left of the 2nd and 3rd columns. */
+   re-wrapping it. 1px is the divider line on the left of the 2nd and 3rd columns;
+   the edge columns have the normal side padding on their outer side (see above). */
 .columns.is-resizing[data-expanded]:not([data-view="page"]) .column:not(.is-expanded) .column-summary {
   width: calc(100vw / 6 - 2 * var(--side-padding-narrow) - 1px);
 }
 
 .columns.is-resizing[data-expanded]:not([data-view="page"]) .column:first-of-type:not(.is-expanded) .column-summary {
-  width: calc(100vw / 6 - 2 * var(--side-padding-narrow));
+  width: calc(100vw / 6 - var(--side-padding) - var(--side-padding-narrow));
+}
+
+.columns.is-resizing[data-expanded]:not([data-view="page"]) .column:last-of-type:not(.is-expanded) .column-summary {
+  width: calc(100vw / 6 - var(--side-padding) - var(--side-padding-narrow) - 1px);
 }
 
 /* ...takes its final size at once, so the column that was open doesn't shrink
@@ -313,33 +320,11 @@
 
 /* Space Mono titles are wide: in the narrow columns (1/6 of the window with a column
    open) they shrink only as far as needed for "Technology", 10 letters, about 6.2
-   times the font size, to fit. Vertical titles (page open) don't need this. */
+   times the font size, to fit the narrowest text space (an edge column's). All three
+   get the same size. Vertical titles (page open) don't need this. */
 .columns[data-expanded]:not([data-view="page"]) .column:not(.is-expanded) .column-title.mono {
-  font-size: min(var(--size-title-small), (100vw / 6 - 2 * var(--side-padding-narrow)) / 6.2);
-}
-
-/* "← Home" and "Download CV" stay in line with the text of the first and
-   last columns, moving in as those columns' side padding shrinks (and back out
-   to the normal padding while a project page is open, see above) */
-.greeting,
-.top-bar {
-  transition: padding var(--expand-time) var(--ease);
-}
-
-body:has(.columns[data-expanded] > .column:first-of-type:not(.is-expanded)) .greeting {
-  padding-left: var(--side-padding-narrow);
-}
-
-body:has(.columns[data-view="page"] > .column:first-of-type:not(.is-expanded)) .greeting {
-  padding-left: var(--side-padding);
-}
-
-body:has(.columns[data-expanded] > .column:last-of-type:not(.is-expanded)) .top-bar {
-  padding-right: var(--side-padding-narrow);
-}
-
-body:has(.columns[data-view="page"] > .column:last-of-type:not(.is-expanded)) .top-bar {
-  padding-right: var(--side-padding);
+  font-size: min(var(--size-title-small),
+                 (100vw / 6 - var(--side-padding) - var(--side-padding-narrow)) / 6.2);
 }
 
 /* ---------- Open column: summary out, projects in ---------- */
